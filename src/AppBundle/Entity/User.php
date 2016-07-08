@@ -38,7 +38,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=256, unique=true)
      */
-    private $mail;
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -128,7 +128,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->mail,
+            $this->email,
             $this->firstname,
             $this->lastname,
             $this->birthday,
@@ -160,7 +160,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->mail,
+            $this->email,
             $this->firstname,
             $this->lastname,
             $this->birthday,
@@ -274,6 +274,24 @@ class User implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+
+
+    /**
      * Set password
      *
      * @param string $password
@@ -287,29 +305,6 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Set mail
-     *
-     * @param string $mail
-     *
-     * @return User
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    /**
-     * Get mail
-     *
-     * @return string
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
 
     /**
      * Set firstname
@@ -682,4 +677,27 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return $this->isActive;
     }
+
+    function __toString()
+    {
+        return json_encode(array($this->id,
+            $this->username,
+            $this->password,
+            $this->email,
+            $this->firstname,
+            $this->lastname,
+            $this->birthday->getDate(),
+            $this->city,
+            $this->country,
+            $this->phoneNumber,
+            $this->profilePicture,
+            $this->description,
+            $this->fidelity,
+            $this->moderator,
+            $this->administrator,
+            $this->createdAt->getDate(),
+            $this->isActive));
+    }
+
+
 }

@@ -3,23 +3,22 @@
 security:
 
     encoders:
-      AppBundle\Entity\User:
-        algorithm: bcrypt
+        AppBundle\Entity\User: bcrypt
 
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         db_provider:
-          entity:
-            class: AppBundle:User
-            property: username
+            entity:
+                class: AppBundle:User
+                property: username
 
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
-           pattern: ^/(_(profiler|wdt)|css|images|js)/
-           security: false
+             pattern: ^/(_(profiler|wdt)|css|images|js)/
+             security: false
 
         main:
             # activate different ways to authenticate
