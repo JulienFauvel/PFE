@@ -124,7 +124,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function serialize()
     {
-        return $this->serialize(array(
+        return serialize(array(
             $this->id,
             $this->username,
             $this->password,
@@ -678,7 +678,7 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->isActive;
     }
 
-    function __toString()
+    public function toJson()
     {
         return json_encode(array($this->id,
             $this->username,
@@ -686,7 +686,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->email,
             $this->firstname,
             $this->lastname,
-            $this->birthday->getDate(),
+            $this->birthday,
             $this->city,
             $this->country,
             $this->phoneNumber,
@@ -695,7 +695,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->fidelity,
             $this->moderator,
             $this->administrator,
-            $this->createdAt->getDate(),
+            $this->createdAt,
             $this->isActive));
     }
 
