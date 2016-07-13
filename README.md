@@ -5,25 +5,25 @@ Projet tutoré *(PFE)*
 ##Installation
 
 ###Requirements
-1. Clone the project
+* Clone the project
 ```bash
 git clone https://github.com/JulienFauvel/pfe.git
 ```
 
-2. Install [PHP 7](https://secure.php.net/)
-3. Install [npm](https://nodejs.org/en/)
-4. Install Bower globally
+* Install [PHP 7](https://secure.php.net/)
+* Install [npm](https://nodejs.org/en/)
+* Install Bower globally
 ```bash
 npm install -g bower
 ```
-5. Install the front-end dependencies with bower
+* Install the front-end dependencies with bower
 
 *In the project's directory*
 ```bash
 bower update
 ```
-6. Install [Composer](https://getcomposer.org/)
-7. Get all dependencies
+* Install [Composer](https://getcomposer.org/)
+* Get all dependencies
 
 *In the project's directory*
 
