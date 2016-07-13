@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="col-lg-7 col-lg-offset-2">
     {{ form_start(form) }}
+
     {{ form_row(form.username) }}
     {{ form_row(form.email) }}
     {{ form_row(form.password.first) }}
@@ -14,7 +16,8 @@
     {{ form_row(form.phoneNumber) }}
     {{ form_row(form.profilePicture) }}
     {{ form_row(form.description) }}
+    {{ form_row(form.submit) }}
 
-    <button type="submit">Register!</button>
     {{ form_end(form) }}
+    </div>
 {% endblock %}
