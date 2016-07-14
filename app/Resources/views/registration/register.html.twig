@@ -1,23 +1,26 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="col-lg-7 col-lg-offset-2">
-    {{ form_start(form) }}
+    <div class="col-md-5 col-md-offset-3">
+        <h3>Création d'un compte</h3>
+        <br/>
 
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password.first) }}
-    {{ form_row(form.password.second) }}
-    {{ form_row(form.firstname) }}
-    {{ form_row(form.lastname) }}
-    {{ form_row(form.birthday) }}
-    {{ form_row(form.city) }}
-    {{ form_row(form.country) }}
-    {{ form_row(form.phoneNumber) }}
-    {{ form_row(form.profilePicture) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.submit) }}
+        {{ form_start(form) }}
 
-    {{ form_end(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.birthday) }}
+        {{ form_row(form.city) }}
+        {{ form_row(form.country) }}
+        {{ form_row(form.phoneNumber) }}
+        {{ form_row(form.profilePicture) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.submit) }}
+
+        {{ form_end(form) }}
     </div>
 {% endblock %}
