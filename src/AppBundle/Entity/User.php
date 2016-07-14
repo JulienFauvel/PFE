@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -11,11 +12,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\Table(name="Users")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User extends BaseUser implements AdvancedUserInterface, \Serializable
 {
     //Role constants
-    const ROLE_ADMINISTRATOR = "admin";
-    const ROLE_MODERATOR = "mod";
+    const ROLE_ADMIN = "admin";
+    const ROLE_MOD = "mod";
     const ROLE_USER = "user";
 
     /**
@@ -23,22 +24,7 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=64, unique=true)
-     */
-    private $username;
-
-    /**
-     * @ORM\Column(type="string", length=128)
-     */
-    private $password;
-
-    /**
-     * @ORM\Column(type="string", length=256, unique=true)
-     */
-    private $email;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -101,208 +87,16 @@ class User implements AdvancedUserInterface, \Serializable
     private $createdAt;
 
     /**
-     * @ORM\Column(type="boolean", name="is_active")
-     */
-    private $isActive;
-
-    /**
      * User constructor.
      */
     public function __construct()
     {
+        parent::__construct();
         $this->fidelity = 0;
+        $this->enabled = true;
+        $this->createdAt = new \DateTime();
         $this->administrator = false;
         $this->moderator = false;
-    }
-
-
-    /**
-     * String representation of User
-     * @link http://php.net/manual/en/serializable.serialize.php
-     * @return string the string representation of the object or null
-     * @since 5.1.0
-     */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->email,
-            $this->firstname,
-            $this->lastname,
-            $this->birthday,
-            $this->city,
-            $this->country,
-            $this->phoneNumber,
-            $this->profilePicture,
-            $this->description,
-            $this->fidelity,
-            $this->moderator,
-            $this->administrator,
-            $this->createdAt,
-            $this->isActive
-        ));
-    }
-
-    /**
-     * Constructs the object User
-     * @link http://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
-     * The string representation of the object.
-     * </p>
-     * @return void
-     * @since 5.1.0
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->id,
-            $this->username,
-            $this->password,
-            $this->email,
-            $this->firstname,
-            $this->lastname,
-            $this->birthday,
-            $this->city,
-            $this->country,
-            $this->phoneNumber,
-            $this->profilePicture,
-            $this->description,
-            $this->fidelity,
-            $this->moderator,
-            $this->administrator,
-            $this->createdAt,
-            $this->isActive
-        ) = unserialize($serialized);
-    }
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        if ($this->administrator) {
-            return array(self::ROLE_ADMINISTRATOR);
-        } elseif ($this->moderator) {
-            return array(self::ROLE_MODERATOR);
-        } else {
-            return array(self::ROLE_USER);
-        }
-    }
-
-    /**
-     * Returns the password used to authenticate the user.
-     *
-     * This should be the encoded password. On authentication, a plain-text
-     * password will be salted, encoded, and then compared to this value.
-     *
-     * @return string The password
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-        return null;
-    }
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
 
@@ -541,7 +335,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return boolean
      */
-    public function getModerator()
+    public function isModerator()
     {
         return $this->moderator;
     }
@@ -565,7 +359,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return boolean
      */
-    public function getAdministrator()
+    public function isAdministrator()
     {
         return $this->administrator;
     }
@@ -608,75 +402,7 @@ class User implements AdvancedUserInterface, \Serializable
         return $this;
     }
 
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
 
-    /**
-     * Checks whether the user's account has expired.
-     *
-     * Internally, if this method returns false, the authentication system
-     * will throw an AccountExpiredException and prevent login.
-     *
-     * @return bool true if the user's account is non expired, false otherwise
-     *
-     * @see AccountExpiredException
-     */
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * Checks whether the user is locked.
-     *
-     * Internally, if this method returns false, the authentication system
-     * will throw a LockedException and prevent login.
-     *
-     * @return bool true if the user is not locked, false otherwise
-     *
-     * @see LockedException
-     */
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    /**
-     * Checks whether the user's credentials (password) has expired.
-     *
-     * Internally, if this method returns false, the authentication system
-     * will throw a CredentialsExpiredException and prevent login.
-     *
-     * @return bool true if the user's credentials are non expired, false otherwise
-     *
-     * @see CredentialsExpiredException
-     */
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * Checks whether the user is enabled.
-     *
-     * Internally, if this method returns false, the authentication system
-     * will throw a DisabledException and prevent login.
-     *
-     * @return bool true if the user is enabled, false otherwise
-     *
-     * @see DisabledException
-     */
-    public function isEnabled()
-    {
-        return $this->isActive;
-    }
 
     public function toJson()
     {
@@ -696,7 +422,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->moderator,
             $this->administrator,
             $this->createdAt,
-            $this->isActive));
+            $this->enabled));
     }
 
 

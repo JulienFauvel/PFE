@@ -31,6 +31,7 @@ bower update
 php path/to/composer.phar install
 ```
 
+
 ##Database
 
 We are using PostgreSQL as the DBMS.
