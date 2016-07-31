@@ -4,8 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <title>
+        {% block title %}Welcome!{% endblock %}
+    </title>
+
     {% block stylesheets %}{% endblock %}
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}"/>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -13,7 +18,7 @@
 {% block navbar %}
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#navbar-collapse" aria-expanded="false">
@@ -25,35 +30,52 @@
                 <a class="navbar-brand" href="/">StudentTravel</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Accueil <span class="sr-only">(current)</span></a></li>
                     <li><a href="/restaurants">Restaurants</a></li>
-                    <li><a href="/voyages">Transport & Voyages</a></li>
+                    <li><a href="/voyages">Voyages</a></li>
                     <li><a href="/bonplans">Bon plans</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right ">
-                    <li><a href="{{ path('user_registration') }}">Crée un compte</a></li>
+                    {% if app.user %}
+                        <li><a href="{{ path('profile') }}">Mon compte</a></li>
+                    {% else %}
+                        <li><a href="{{ path('register') }}">Crée un compte</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
+                    {% endif %}
                     <li>
                         <form class="navbar-form navbar-right" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Rechercher">
                             </div>
-                            <button type="submit" class="btn btn-default"><span
-                                        class="glyphicon glyphicon-search"></span></button>
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
                         </form>
                     </li>
                 </ul>
 
 
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
     </nav>
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block left_panel %}
+    <div class="col-lg-2 col-sm-0"></div>
+{% endblock %}
+
+<div class="col-lg-8">
+{% block content %}{% endblock %}
+</div>
+
+
+{% block right_panel %}
+    <div class="col-lg-2 col-sm-0"></div>
+{% endblock %}
+
 
 <script type="application/javascript" src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script type="application/javascript" src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>

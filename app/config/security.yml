@@ -1,5 +1,3 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/book/security.html
 security:
 
     encoders:
@@ -12,35 +10,31 @@ security:
         ROLE_ADMIN: [ROLE_USER, ROLE_MOD]
 
 
-    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
-        #db_provider:
-        #    entity:
-        #       class: AppBundle:User
-        #       property: username
 
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
              pattern: ^/(_(profiler|wdt)|css|images|js)/
              security: false
 
         main:
-            # activate different ways to authenticate
-
             pattern: ^/
-            anonymous: ~
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
+                default_target_path: homepage
 
-            logout: true
+            logout:
+                path: fos_user_security_logout
+                target: homepage
             anonymous: true
 
-            #provider: db_provider
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
 
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html

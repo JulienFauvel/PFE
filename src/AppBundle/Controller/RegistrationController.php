@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class RegistrationController extends Controller
 {
     /**
-     * @Route("/register", name="user_registration")
+     * @Route("/register", name="register")
      * @param $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -37,7 +37,7 @@ class RegistrationController extends Controller
         }
 
         return $this->render(
-            'registration/register.html.twig',
+            'register/index.html.twig',
             array('form' => $form->createView()));
     }
 }
