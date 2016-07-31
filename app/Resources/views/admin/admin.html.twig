@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>
-        {% block title %}Welcome!{% endblock %}
+        {% block title %}Admin Panel{% endblock %}
     </title>
 
     {% block stylesheets %}{% endblock %}
@@ -27,37 +27,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">StudentTravel</a>
+                <a class="navbar-brand" href="{{ path('admin') }}">Admin Panel</a>
             </div>
 
 
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/restaurants">Restaurants</a></li>
+                    <li><a href="/restaurants">Users</a></li>
                     <li><a href="/voyages">Voyages</a></li>
                     <li><a href="/bonplans">Bon plans</a></li>
                 </ul>
-
-                <ul class="nav navbar-nav navbar-right ">
-                    {% if app.user %}
-                        <li><a href="{{ path('profile') }}">Mon compte</a></li>
-                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('register') }}">Crée un compte</a></li>
-                        <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
-                    {% endif %}
-                    <li>
-                        <form class="navbar-form navbar-right" role="search">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Rechercher">
-                            </div>
-                            <button type="submit" class="btn btn-default">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </form>
-                    </li>
-                </ul>
-
 
             </div>
         </div>
@@ -69,7 +48,7 @@
 {% endblock %}
 
 <div class="col-lg-8">
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </div>
 
 

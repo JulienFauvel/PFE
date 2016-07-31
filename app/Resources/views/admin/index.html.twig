@@ -1,0 +1,9 @@
+{% extends 'admin.html.twig' %}
+
+{% block content %}
+    {% for user in users %}
+        <div>
+            <p>{{ dump( user ) }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}

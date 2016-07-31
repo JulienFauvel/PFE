@@ -5,8 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends Controller

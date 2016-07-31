@@ -8,21 +8,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+
     /**
      * @Route("/", name="homepage")
      * @Route("/index")
      */
     public function indexAction(Request $request)
     {
-        $users = $this->getDoctrine()
-            ->getRepository('AppBundle:User')
-            ->loadUsers();
-        
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-            'users' => $users,
-        ]);
+        return $this->render('default/index.html.twig');
     }
-
 
 }
