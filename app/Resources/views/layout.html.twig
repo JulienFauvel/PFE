@@ -64,17 +64,19 @@
     </nav>
 {% endblock %}
 
-{% block left_panel %}
-    <div class="col-lg-2 col-sm-0"></div>
-{% endblock %}
+{% block main_block %}
 
-<div class="col-lg-8">
-{% block content %}{% endblock %}
-</div>
+    {% block left_panel %}
+        <div class="col-lg-2 col-sm-0"></div>
+    {% endblock %}
 
+    <div class="col-lg-8">
+    {% block content %}{% endblock %}
+    </div>
 
-{% block right_panel %}
-    <div class="col-lg-2 col-sm-0"></div>
+    {% block right_panel %}
+        <div class="col-lg-2 col-sm-0"></div>
+    {% endblock %}
 {% endblock %}
 
 
