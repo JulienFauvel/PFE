@@ -1,11 +1,12 @@
 <?php
 
 namespace AppBundle\Repository;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * SubjectRepository
  *
  */
-class SubjectRepository extends \Doctrine\ORM\EntityRepository
+class SubjectRepository extends EntityRepository
 {
 }

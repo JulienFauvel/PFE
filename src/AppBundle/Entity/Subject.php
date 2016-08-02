@@ -3,11 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
+
 
 /**
- * Subject
+ * Subject Entity
  *
- * @ORM\Table(name="subject")
+ * @ORM\Table(name="Subjects")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\SubjectRepository")
  */
 class Subject
@@ -21,6 +24,13 @@ class Subject
      */
     private $id;
 
+    /**
+     * @var User
+     *
+     * @OneToOne(targetEntity="User")
+     * @JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
 
     /**
      * @var string
@@ -45,6 +55,24 @@ class Subject
     {
         $this->createAt = new \DateTime();
     }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+
 
     /**
      * Get id
