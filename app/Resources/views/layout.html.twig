@@ -36,11 +36,12 @@
                     <li><a href="/restaurants">Restaurants</a></li>
                     <li><a href="/voyages">Voyages</a></li>
                     <li><a href="/bonplans">Bon plans</a></li>
+                    <li><a href="/forum">Forum</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right ">
                     {% if app.user %}
-                        <li><a href="{{ path('profile') }}">Mon compte</a></li>
+                        <li><a href="{{ path('profile') }}">{{ app.user.username }}</a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                     {% else %}
                         <li><a href="{{ path('register') }}">Crée un compte</a></li>
