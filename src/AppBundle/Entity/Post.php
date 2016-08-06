@@ -4,8 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Post Entity
@@ -35,7 +33,6 @@ class Post
      * @var Subject
      *
      * @ManyToOne(targetEntity="Subject", inversedBy="posts")
-     * @JoinColumn(name="subject_id", referencedColumnName="id")
      */
     private $subject;
 

@@ -38,6 +38,11 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     private $posts;
 
     /**
+     * @OneToMany(targetEntity="Activity", mappedBy="user")
+     */
+    private $activities;
+
+    /**
      * @OneToMany(targetEntity="Evaluation", mappedBy="user")
      */
     private $evaluations;
@@ -146,6 +151,22 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function setPosts($posts)
     {
         $this->posts = $posts;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    /**
+     * @param mixed $activities
+     */
+    public function setActivities($activities)
+    {
+        $this->activities = $activities;
     }
 
     /**

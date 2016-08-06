@@ -37,7 +37,6 @@ class Subject
      * @var User
      *
      * @ManyToOne(targetEntity="User", inversedBy="subjects")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 

@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToOne;
-use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
@@ -34,8 +32,7 @@ class Evaluation
     /**
      * @var Activity
      *
-     * @OneToOne(targetEntity="Activity")
-     * @JoinColumn(name="activity_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="Activity", inversedBy="evaluations")
      */
     private $activity;
 

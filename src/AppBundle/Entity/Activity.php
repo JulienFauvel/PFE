@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToOne;
-use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\AclBundle\Entity\Car;
 
 /**
  * Activity Entity
@@ -28,10 +28,23 @@ class Activity
     /**
      * @var User
      *
-     * @OneToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="User", inversedBy="activities")
      */
     private $user;
+
+    /**
+     * @var Category[]
+     *
+     * ManyToMany(targetEntity="Category")
+     */
+    private $categories;
+
+    /**
+     * @var Tag[]
+     *
+     * ManyToMany(targetEntity="Category")
+     */
+    private $tags;
 
     /**
      * @var Evaluation[]
@@ -43,9 +56,9 @@ class Activity
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    private $name;
+    private $title;
 
     /**
      * @var string
@@ -106,22 +119,6 @@ class Activity
     }
 
     /**
-     * @return Evaluation[]
-     */
-    public function getEvaluations()
-    {
-        return $this->evaluations;
-    }
-
-    /**
-     * @param Evaluation[] $evaluations
-     */
-    public function setEvaluations($evaluations)
-    {
-        $this->evaluations = $evaluations;
-    }
-
-    /**
      * @return int
      */
     public function getId()
@@ -154,19 +151,67 @@ class Activity
     }
 
     /**
-     * @return string
+     * @return Evaluation[]
      */
-    public function getName()
+    public function getEvaluations()
     {
-        return $this->name;
+        return $this->evaluations;
     }
 
     /**
-     * @param string $name
+     * @param Evaluation[] $evaluations
      */
-    public function setName($name)
+    public function setEvaluations($evaluations)
     {
-        $this->name = $name;
+        $this->evaluations = $evaluations;
+    }
+
+    /**
+     * @return Category[]
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param Category[] $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    }
+
+    /**
+     * @return Tag[]
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag[] $tags
+     */
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
     }
 
     /**

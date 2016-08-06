@@ -48,7 +48,7 @@
                         <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
                     {% endif %}
                     <li>
-                        <form action="{{ path('search') }}" class="navbar-form navbar-right" role="search">
+                        <form action="{{ path('search') }}" method="post" class="navbar-form navbar-right" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="q" placeholder="Rechercher">
                             </div>

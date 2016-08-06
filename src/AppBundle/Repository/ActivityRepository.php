@@ -21,8 +21,8 @@ class ActivityRepository extends EntityRepository
     public function searchInTitle($q)
     {
         return $this->createQueryBuilder('a')
-            ->where('a.name LIKE :name')
-            ->setParameter('name', $q)
+            ->where('lower(a.title) LIKE lower(:title)')
+            ->setParameter('title', '%'.$q.'%')
             ->getQuery()
             ->getArrayResult();
     }
