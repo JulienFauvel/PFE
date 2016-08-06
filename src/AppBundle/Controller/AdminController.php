@@ -6,10 +6,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class AdminController
+ * @package AppBundle\Controller
+ */
 class AdminController extends Controller
 {
 
     /**
+     * Index action
+     *
      * @Route("/admin", name="admin")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -20,7 +26,7 @@ class AdminController extends Controller
             ->getRepository('AppBundle:User')
             ->loadUsers();
 
-        return $this->render('default/index.html.twig', [
+        return $this->render('admin/index.html.twig', [
             'users' => $users,
         ]);
     }
