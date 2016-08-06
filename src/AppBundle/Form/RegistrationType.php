@@ -13,12 +13,23 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+/**
+ * Class UserType
+ * @package AppBundle\Form
+ */
+class RegistrationType extends AbstractType
 {
 
+    /**
+     * Build the form for the User creation
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder->setMethod('POST')
+            ->setAction('/register/new')
             ->add('username', TextType::class)
             ->add('email', EmailType::class)
             ->add('password', RepeatedType::class, array(
@@ -37,11 +48,22 @@ class UserType extends AbstractType
             ->add('submit', SubmitType::class);
     }
 
+    /**
+     * Set the options of the form
+     *
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-           'data_class' => 'AppBundle\Entity\User',
+            'data_class' => 'AppBundle\Entity\User',
         ));
+    }
+
+
+    public function getBlockPrefix()
+    {
+        return 'app_user_registration';
     }
 
 }
