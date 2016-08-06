@@ -154,7 +154,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return mixed
+     * @return Activity[]
      */
     public function getActivities()
     {
@@ -162,7 +162,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param mixed $activities
+     * @param Activity[] $activities
      */
     public function setActivities($activities)
     {

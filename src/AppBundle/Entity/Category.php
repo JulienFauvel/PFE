@@ -77,7 +77,7 @@ class Category
     }
 
     /**
-     * @return mixed
+     * @return Activity[]
      */
     public function getActivities()
     {
@@ -85,7 +85,7 @@ class Category
     }
 
     /**
-     * @param mixed $activities
+     * @param Activity[] $activities
      */
     public function setActivities($activities)
     {
