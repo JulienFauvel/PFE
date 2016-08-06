@@ -5,6 +5,8 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 
 /**
@@ -25,9 +27,16 @@ class Subject
     private $id;
 
     /**
+     * @var Post[]
+     *
+     * @OneToMany(targetEntity="Post", mappedBy="subject")
+     */
+    private $posts;
+
+    /**
      * @var User
      *
-     * @OneToOne(targetEntity="User")
+     * @ManyToOne(targetEntity="User", inversedBy="subjects")
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -41,7 +50,7 @@ class Subject
 
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -70,6 +79,22 @@ class Subject
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return Post[]
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param Post[] $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
     }
 
 
@@ -109,7 +134,7 @@ class Subject
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreateAt()
     {
@@ -117,7 +142,7 @@ class Subject
     }
 
     /**
-     * @param DateTime $createAt
+     * @param \DateTime $createAt
      */
     public function setCreateAt($createAt)
     {

@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 
 /**
  * Evaluation Entity
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @ORM\Table(name="Evaluations")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EvaluationRepository")
  */
-class Evaluations
+class Evaluation
 {
     /**
      * @var int
@@ -26,8 +27,7 @@ class Evaluations
     /**
      * @var User
      *
-     * @OneToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="User", inversedBy="evaluations")
      */
     private $user;
 
@@ -98,8 +98,6 @@ class Evaluations
         $this->activity = $activity;
     }
 
-
-
     /**
      * @return int
      */
@@ -133,7 +131,7 @@ class Evaluations
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getComment()
     {
@@ -141,7 +139,7 @@ class Evaluations
     }
 
     /**
-     * @param mixed $comment
+     * @param string $comment
      */
     public function setComment($comment)
     {

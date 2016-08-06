@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Post Entity
@@ -27,15 +27,14 @@ class Post
     /**
      * @var User
      *
-     * @OneToOne(targetEntity="User")
-     * @JoinColumn(name="user_id", referencedColumnName="id")
+     * @ManyToOne(targetEntity="User", inversedBy="posts")
      */
     private $user;
 
     /**
      * @var Subject
      *
-     * @ManyToOne(targetEntity="Subject")
+     * @ManyToOne(targetEntity="Subject", inversedBy="posts")
      * @JoinColumn(name="subject_id", referencedColumnName="id")
      */
     private $subject;
@@ -61,14 +60,16 @@ class Post
      */
     private $editedAt;
 
-
+    /**
+     * Post constructor.
+     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
     /**
-     * @return mixed
+     * @return User
      */
     public function getUser()
     {
@@ -76,7 +77,7 @@ class Post
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
      */
     public function setUser($user)
     {

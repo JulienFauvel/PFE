@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
@@ -11,14 +12,25 @@ use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
  */
 class UserRepository extends EntityRepository implements UserLoaderInterface
 {
+
+    /**
+     * Returns all the users
+     *
+     * @return User[]
+     */
     public function loadUsers()
     {
         return $this->createQueryBuilder('user')
             ->getQuery()
             ->getArrayResult();
     }
-    
-    
+
+    /**
+     * Return the user with the username
+     *
+     * @param string $username
+     * @return User
+     */
     public function loadUserByUsername($username)
     {
         return $this->createQueryBuilder('user')
@@ -28,6 +40,12 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getOneOrNullResult();
     }
 
+    /**
+     * Return the user with the mail
+     *
+     * @param string $mail
+     * @return User
+     */
     public function loadUserByMail($mail)
     {
         return $this->createQueryBuilder('user')

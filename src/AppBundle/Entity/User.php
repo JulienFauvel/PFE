@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * User Entity
@@ -15,9 +16,9 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 class User extends BaseUser implements AdvancedUserInterface, \Serializable
 {
     //Role constants
-    const ROLE_ADMIN = "admin";
-    const ROLE_MOD = "mod";
-    const ROLE_USER = "user";
+    const ROLE_ADMIN = "ROLE_ADMIN";
+    const ROLE_MOD = "ROLE_MOD";
+    const ROLE_USER = "ROLE_USER";
 
     /**
      * @ORM\Column(type="integer")
@@ -25,6 +26,21 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @OneToMany(targetEntity="Subject", mappedBy="user")
+     */
+    private $subjects;
+
+    /**
+     * @OneToMany(targetEntity="Post", mappedBy="user")
+     */
+    private $posts;
+
+    /**
+     * @OneToMany(targetEntity="Evaluation", mappedBy="user")
+     */
+    private $evaluations;
 
     /**
      * @ORM\Column(type="string", length=64)
@@ -92,6 +108,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         parent::__construct();
+        $this->setRoles(array(User::ROLE_USER));
         $this->fidelity = 0;
         $this->enabled = true;
         $this->createdAt = new \DateTime();
@@ -99,6 +116,69 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
         $this->moderator = false;
     }
 
+    /**
+     * @return Subject[]
+     */
+    public function getSubjects()
+    {
+        return $this->subjects;
+    }
+
+    /**
+     * @param Subject[] $subjects
+     */
+    public function setSubjects($subjects)
+    {
+        $this->subjects = $subjects;
+    }
+
+    /**
+     * @return Post[]
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @param Post[] $posts
+     */
+    public function setPosts($posts)
+    {
+        $this->posts = $posts;
+    }
+
+    /**
+     * @return Evaluation
+     */
+    public function getEvaluations()
+    {
+        return $this->evaluations;
+    }
+
+    /**
+     * @param Evaluation[] $evaluations
+     */
+    public function setEvaluations($evaluations)
+    {
+        $this->evaluations = $evaluations;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param integer $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Set firstname
@@ -403,7 +483,11 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
 
-
+    /**
+     * Return the Json representation of the User
+     *
+     * @return array
+     */
     public function toJson()
     {
         return json_encode(array($this->id,

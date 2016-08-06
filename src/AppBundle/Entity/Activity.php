@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Activity Entity
@@ -31,6 +32,13 @@ class Activity
      * @JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @var Evaluation[]
+     *
+     * @OneToMany(targetEntity="Evaluation", mappedBy="activity")
+     */
+    private $evaluations;
 
     /**
      * @var string
@@ -82,7 +90,7 @@ class Activity
     private $editedAt;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -97,6 +105,21 @@ class Activity
         $this->createAt = new \DateTime();
     }
 
+    /**
+     * @return Evaluation[]
+     */
+    public function getEvaluations()
+    {
+        return $this->evaluations;
+    }
+
+    /**
+     * @param Evaluation[] $evaluations
+     */
+    public function setEvaluations($evaluations)
+    {
+        $this->evaluations = $evaluations;
+    }
 
     /**
      * @return int
@@ -131,7 +154,7 @@ class Activity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -139,7 +162,7 @@ class Activity
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name)
     {
@@ -179,7 +202,7 @@ class Activity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getCity()
     {
@@ -187,7 +210,7 @@ class Activity
     }
 
     /**
-     * @param mixed $city
+     * @param string $city
      */
     public function setCity($city)
     {
@@ -195,7 +218,7 @@ class Activity
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPostalCode()
     {
@@ -203,7 +226,7 @@ class Activity
     }
 
     /**
-     * @param mixed $postalCode
+     * @param string $postalCode
      */
     public function setPostalCode($postalCode)
     {
@@ -243,7 +266,7 @@ class Activity
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCreateAt()
     {
@@ -251,7 +274,7 @@ class Activity
     }
 
     /**
-     * @param DateTime $createAt
+     * @param \DateTime $createAt
      */
     public function setCreateAt($createAt)
     {
