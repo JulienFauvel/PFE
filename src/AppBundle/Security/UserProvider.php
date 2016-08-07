@@ -69,15 +69,6 @@ class UserProvider extends BaseClass
             $user->setProfilePicture($response->getProfilePicture());
             $user->setEnabled(true);
 
-            $log = new Logger('debug');
-            $log->pushHandler(new StreamHandler('debug.log', Logger::WARNING));
-            $log->warning($response->getNickname());
-            $log->warning($response->getEmail());
-            $log->warning($response->getAccessToken());
-            $log->warning($response->getFirstName());
-            $log->warning($response->getLastName());
-            $log->warning($response->getProfilePicture());
-
             $this->userManager->updateUser($user);
 
             return $user;
