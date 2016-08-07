@@ -2,11 +2,20 @@
 
 {% block title %}Login{% endblock %}
 
+{% block meta %}
+    <meta name="google-signin-client_id" content="109335240896-7rskloeu9f69ojkmkr4rbae7gq1rbti2.apps.googleusercontent.com">
+{% endblock %}
+
 {% block content %}
     {% block fos_user_content %}
         {% if error %}
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
+
+        <div style="block:inline;">
+            <a href="/login/google"><button class="btn btn-default">Google</button></a>
+            <a href="/login/facebook"><button class="btn btn-default">Facebook</button></a>
+        </div>
 
         <form class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
@@ -40,5 +49,26 @@
                 </div>
             </div>
         </form>
+
     {% endblock %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1176054912451231',
+                xfbml      : true,
+                version    : 'v2.7'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 {% endblock %}

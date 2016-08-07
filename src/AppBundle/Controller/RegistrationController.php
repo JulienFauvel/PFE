@@ -2,12 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
 use AppBundle\Form\RegistrationType;
-use AppBundle\Form\UserType;
 
-use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
@@ -28,7 +26,10 @@ class RegistrationController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $form = $this->createForm(RegistrationType::class);
+        $form = $this->createForm(RegistrationType::class, null, array(
+            'action' => $this->generateUrl('register_new'),
+            'method' => 'POST'
+        ));
         $form->handleRequest($request);
 
         return $this->render('register/register.html.twig',
@@ -47,7 +48,10 @@ class RegistrationController extends BaseController
      */
     public function newAction(Request $request)
     {
-        $form = $this->createForm(RegistrationType::class);
+        $form = $this->createForm(RegistrationType::class, null, array(
+            'action' => $this->generateUrl('register_new'),
+            'method' => 'POST'
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,7 +64,6 @@ class RegistrationController extends BaseController
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($user);
             $em->flush();
-
 
             $request->getSession()
                 ->getFlashBag()

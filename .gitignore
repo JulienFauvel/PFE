@@ -1,4 +1,4 @@
-
+/app/config/oauth.yml
 /app/config/parameters.yml
 /build/
 /phpunit.xml
