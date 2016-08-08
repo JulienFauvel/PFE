@@ -5,8 +5,6 @@ namespace AppBundle\Security;
 use AppBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserProvider extends BaseClass
@@ -50,8 +48,10 @@ class UserProvider extends BaseClass
         //when the user is registrating
         if ($user === null) {
 
-
+            //Récupération du type d'OAuth (Facebook ou Google)
             $service = $response->getResourceOwner()->getName();
+
+            //Génération des setters
             $setter = 'set'.ucfirst($service);
             $setter_id = $setter.'Id';
             $setter_token = $setter.'AccessToken';
@@ -63,7 +63,7 @@ class UserProvider extends BaseClass
 
             $user->setUsername($response->getNickname());
             $user->setEmail($response->getEmail());
-            $user->setPlainPassword($response->getAccessToken());
+            $user->setPlainPassword(hash("sha256", $response->getAccessToken()));
             $user->setFirstName($response->getFirstName());
             $user->setLastName($response->getLastName());
             $user->setProfilePicture($response->getProfilePicture());
