@@ -2,27 +2,34 @@
 
 {% block stylesheets %}
     <style>
-        #bg {
-            position: absolute;
-            opacity: 0.4;
-            left: 0;
-            top: 0;
+
+        body {
+            background: url("{{ asset('assets/image/welcome.jpg') }}") no-repeat fixed;
+        }
+
+        .jumbotron {
+            background: none !important;
         }
 
     </style>
 {% endblock %}
 
-{% block main_block %}
+{% block content %}
 
-    <div id="" class="jumbotron">
+    <div class="jumbotron">
         <h1>Bienvenue sur Quark !</h1>
         <p>Découvrez des trucs pas cher à côté de chez vous ! 💯💯💯💯💯💯💯</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">En savoir plus</a></p>
-        <img id="bg" src="{{ asset('assets/image/travel.jpg') }}">
     </div>
-    {% for activity in activities %}
-        {{ dump(activity) }}
 
+
+    <div class="row">
+
+    {% for activity in activities %}
+        {% set var = {'activity': activity} %}
+        {% include 'activity/activity_list.html.twig' %}
     {% endfor %}
+
+    </div>
 
 {% endblock %}
