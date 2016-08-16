@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
 
 
 /**
@@ -33,7 +34,7 @@ class Category
     /**
      * @var Activity[]
      *
-     * @ManyToMany(targetEntity="Activity")
+     * @OneToMany(targetEntity="Activity", mappedBy="category")
      */
     private $activities;
 

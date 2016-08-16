@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\ManyToMany;
 use Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\AclBundle\Entity\Car;
 
 /**
@@ -33,16 +34,16 @@ class Activity
     private $user;
 
     /**
-     * @var Category[]
+     * @var Category
      *
-     * ManyToMany(targetEntity="Category")
+     * @ManyToOne(targetEntity="Category", inversedBy="activities")
      */
-    private $categories;
+    private $category;
 
     /**
      * @var Tag[]
      *
-     * ManyToMany(targetEntity="Category")
+     * @ManyToMany(targetEntity="Category")
      */
     private $tags;
 
@@ -167,19 +168,19 @@ class Activity
     }
 
     /**
-     * @return Category[]
+     * @return Category
      */
-    public function getCategories()
+    public function getCategory()
     {
-        return $this->categories;
+        return $this->category;
     }
 
     /**
-     * @param Category[] $categories
+     * @param Category $category
      */
-    public function setCategories($categories)
+    public function setCategories($category)
     {
-        $this->categories = $categories;
+        $this->category = $category;
     }
 
     /**
