@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    {% for bonplan in bonplans %}
+        <div>
+            {{ bonplans.title }}
+        </div>
+    {% endfor %}
+
+{% endblock %}

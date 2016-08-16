@@ -9,4 +9,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubjectRepository extends EntityRepository
 {
+    public function getSubjects()
+    {
+        return $this->createQueryBuilder('subject')
+            ->getQuery()
+            ->getArrayResult();
+    }
 }
