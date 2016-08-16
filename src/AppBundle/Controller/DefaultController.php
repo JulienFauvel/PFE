@@ -18,10 +18,18 @@ class DefaultController extends Controller
      *
      * @Route("/", name="homepage")
      * @Route("/index")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
-        return $this->render('default/index.html.twig');
+        $activities = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Activity')
+            ->getActivities(20);
+
+        return $this->render('default/index.html.twig',
+            array('activities' => $activities));
     }
 
 }

@@ -1,7 +1,28 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        #bg {
+            position: absolute;
+            opacity: 0.4;
+            left: 0;
+            top: 0;
+        }
+
+    </style>
+{% endblock %}
+
 {% block main_block %}
 
-    <img class="img-responsive" src="{{ asset('assets/image/travel.jpg') }}"/>
+    <div id="" class="jumbotron">
+        <h1>Bienvenue sur Quark !</h1>
+        <p>Découvrez des trucs pas cher à côté de chez vous ! 💯💯💯💯💯💯💯</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">En savoir plus</a></p>
+        <img id="bg" src="{{ asset('assets/image/travel.jpg') }}">
+    </div>
+    {% for activity in activities %}
+        {{ dump(activity) }}
+
+    {% endfor %}
 
 {% endblock %}

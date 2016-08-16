@@ -27,4 +27,18 @@ class ActivityRepository extends EntityRepository
             ->getArrayResult();
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getActivities($limit = 20, $offset = 0)
+    {
+        return $this->createQueryBuilder('a')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
+
 }

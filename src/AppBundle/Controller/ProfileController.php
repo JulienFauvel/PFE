@@ -23,14 +23,7 @@ class ProfileController extends Controller
      */
     public function indexAction(Request $request)
     {
-        //$securityContext = $this->get('security.authorization_checker');
-        //if (!$securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-        //    return $this->redirectToRoute('fos_user_security_login');
-        //}
-
-        return $this->render(
-            'profile/index.html.twig'
-        );
+        return $this->render('profile/index.html.twig');
     }
 
 }
