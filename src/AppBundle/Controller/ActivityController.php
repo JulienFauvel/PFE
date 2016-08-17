@@ -17,7 +17,6 @@ class ActivityController extends Controller
      * Index action
      *
      * @Route("/activity/{id}", requirements={"id" = "\d+"}, name="activity_detail")
-     * @Route("/index")
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
