@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h3>{{ activity.title }}</h3>
+    <h4>{{ activity.category.displayName }}</h4>
+
+
+
+    <div class="col-md-6 col-sm-12">
+        {{ activity.description }}
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        {{ activity.street }}<br/>
+        {{ activity.postalCode }}<br/>
+        {{ activity.city }}<br/>
+        {{ activity.country }}
+    </div>
+
+    <div class="col-md-12">
+        <h4>Evaluations :</h4>
+        {% for ev in activity.evaluations %}
+            {{ dump(ev) }}
+        {% endfor %}
+    </div>
+
+    {% if app.user %}
+        TODO : Formulaire
+    {% endif %}
+
+{% endblock %}

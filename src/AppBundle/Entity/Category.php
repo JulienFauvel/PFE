@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\OneToMany;
@@ -32,6 +33,13 @@ class Category
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="display_name", type="string", length=64)
+     */
+    private $displayName;
+
+    /**
      * @var Activity[]
      *
      * @OneToMany(targetEntity="Activity", mappedBy="category")
@@ -43,6 +51,7 @@ class Category
      */
     public function __construct()
     {
+        $this->activities = new ArrayCollection();
     }
 
     /**
@@ -78,7 +87,24 @@ class Category
     }
 
     /**
-     * @return Activity[]
+     * @return string
+     */
+    public function getDisplayName(): string
+    {
+        return $this->displayName;
+    }
+
+    /**
+     * @param string $displayName
+     */
+    public function setDisplayName(string $displayName)
+    {
+        $this->displayName = $displayName;
+    }
+
+
+    /**
+     * @return ArrayCollection
      */
     public function getActivities()
     {
@@ -86,9 +112,9 @@ class Category
     }
 
     /**
-     * @param Activity[] $activities
+     * @param ArrayCollection $activities
      */
-    public function setActivities($activities)
+    public function setActivities(ArrayCollection $activities)
     {
         $this->activities = $activities;
     }

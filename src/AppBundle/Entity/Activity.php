@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
@@ -48,7 +49,7 @@ class Activity
     private $tags;
 
     /**
-     * @var Evaluation[]
+     * @var ArrayCollection
      *
      * @OneToMany(targetEntity="Evaluation", mappedBy="activity")
      */
@@ -117,6 +118,7 @@ class Activity
     public function __construct()
     {
         $this->createAt = new \DateTime();
+        $this->evaluations = new ArrayCollection();
     }
 
     /**
@@ -152,7 +154,7 @@ class Activity
     }
 
     /**
-     * @return Evaluation[]
+     * @return ArrayCollection
      */
     public function getEvaluations()
     {
@@ -160,9 +162,9 @@ class Activity
     }
 
     /**
-     * @param Evaluation[] $evaluations
+     * @param ArrayCollection $evaluations
      */
-    public function setEvaluations($evaluations)
+    public function setEvaluations(ArrayCollection $evaluations)
     {
         $this->evaluations = $evaluations;
     }

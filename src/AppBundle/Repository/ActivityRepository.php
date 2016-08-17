@@ -41,4 +41,20 @@ class ActivityRepository extends EntityRepository
             ->getResult();
     }
 
+    /**
+     * Get the Activity with the ID
+     *
+     * @param int $id
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getActivity($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.id = '.$id)
+            ->getQuery()
+            ->getSingleResult();
+    }
+
+
+
 }
