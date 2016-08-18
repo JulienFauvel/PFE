@@ -31,7 +31,7 @@ class ActivityController extends Controller
             throw $this->createNotFoundException("The activity doesn't exist");
         }
 
-        return $this->render('activity/activity_detail.html.twig',
+        return $this->render('activity/show.html.twig',
             array('activity' => $activity));
     }
 
