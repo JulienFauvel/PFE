@@ -52,7 +52,23 @@ class ActivityRepository extends EntityRepository
         return $this->createQueryBuilder('a')
             ->where('a.id = '.$id)
             ->getQuery()
-            ->getSingleResult();
+            ->getOneOrNullResult();
+    }
+
+    /**
+     * Get the activities by category name
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function getActivitiesByCategory($name)
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.category', 'c')
+            ->where('c.name = :name')
+            ->setParameter('name', $name)
+            ->getQuery()
+            ->getResult();
     }
 
 
