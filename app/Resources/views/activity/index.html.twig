@@ -1,17 +1,36 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheets %}
+    <style>
+        .add_button {
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
 
-    <h2>{{ category }}</h2>
+    <div class="col-md-12 col-xs-12">
+        <div class="col-md-6 col-xs-11">
+            <h2>{{ category.displayName }}</h2>
+        </div>
+        <div class="col-md-1 col-md-offset-5 col-xs-1 add_button">
+            <a href="{{ path('activity_new', {'c': category.name}) }}">
+                <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+            </a>
+        </div>
+    </div>
 
-    <div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="row">
 
-        {% for activity in activities %}
-            {% set var = {'activity': activity} %}
-            {% include 'activity/activity_list_partial.html.twig' %}
-        {% endfor %}
+            {% for activity in activities %}
+                {% set var = {'activity': activity} %}
+                {% include 'activity/activity_list_partial.html.twig' %}
+            {% endfor %}
 
+        </div>
     </div>
 
 {% endblock %}

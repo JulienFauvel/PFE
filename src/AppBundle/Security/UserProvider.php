@@ -52,6 +52,8 @@ class UserProvider extends BaseClass
             //Récupération du type d'OAuth (Facebook ou Google)
             $service = $response->getResourceOwner()->getName();
 
+            //TODO : tester si l'email existe déjà
+
             //Génération des setters
             $setter = 'set'.ucfirst($service);
             $setter_id = $setter.'Id';

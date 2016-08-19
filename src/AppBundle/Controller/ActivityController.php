@@ -13,8 +13,32 @@ use Symfony\Component\HttpFoundation\Request;
 class ActivityController extends Controller
 {
 
+
     /**
-     * Index action
+     * New action
+     *
+     * @Route("/activity/new", name="activity_new")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function newAction(Request $request)
+    {
+        $categories = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Category')
+            ->getCategories();
+
+        return $this->render('activity/new.html.twig',
+            [
+                'default_cat' => $request->get('c'),
+                'categories' => $categories
+            ]
+        );
+    }
+
+
+    /**
+     * Show action
      *
      * @Route("/activity/{id}", requirements={"id" = "\d+"}, name="activity_detail")
      * @param int $id
@@ -32,7 +56,7 @@ class ActivityController extends Controller
         }
 
         return $this->render('activity/show.html.twig',
-            array('activity' => $activity));
+            ['activity' => $activity]);
     }
 
     /**
@@ -49,8 +73,19 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivitiesByCategory('restaurant');
 
+        $cat = null;
+        if(count($activities) > 0) $cat = $activities[0]->getCategory();
+
+        if($cat === null)
+        {
+            return $this->redirectToRoute('activity_new', ['c' => 'restaurant']);
+        }
+
         return $this->render('activity/index.html.twig',
-            array('activities' => $activities, 'category' => 'Restaurants')
+            [
+                'activities' => $activities,
+                'category' => $cat
+            ]
         );
     }
 
@@ -68,8 +103,19 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivitiesByCategory('bonplan');
 
+        $cat = null;
+        if(count($activities) > 0) $cat = $activities[0]->getCategory();
+
+        if($cat === null)
+        {
+            return $this->redirectToRoute('activity_new', ['c' => 'bonplan']);
+        }
+
         return $this->render('activity/index.html.twig',
-            array('activities' => $activities, 'category' => 'Bon Plans')
+            [
+                'activities' => $activities,
+                'category' => $cat
+            ]
         );
     }
 
@@ -87,8 +133,18 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivitiesByCategory('voyage');
 
+        $cat = null;
+        if(count($activities) > 0) $cat = $activities[0]->getCategory();
+
+        if($cat === null)
+        {
+            return $this->redirectToRoute('activity_new', ['c' => 'voyage']);
+        }
         return $this->render('activity/index.html.twig',
-            array('activities' => $activities, 'category' => 'Voyages')
+            [
+                'activities' => $activities,
+                'category' => $cat
+            ]
         );
     }
 
@@ -106,8 +162,19 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivitiesByCategory('bar_loisir');
 
+        $cat = null;
+        if(count($activities) > 0) $cat = $activities[0]->getCategory();
+
+        if($cat === null)
+        {
+            return $this->redirectToRoute('activity_new', ['c' => 'bar_loisir']);
+        }
+
         return $this->render('activity/index.html.twig',
-            array('activities' => $activities, 'category' => 'Bars & Loisirs')
+            [
+                'activities' => $activities,
+                'category' => $cat
+            ]
         );
     }
 

@@ -6,11 +6,13 @@
             <h3>{{ activity.title }}</h3>
             <h4>{{ activity.category.displayName }}</h4>
             <p>
-                Cras justo odio, dapibus ac facilisis in,
-                egestas eget quam. Donec id elit non mi porta gravida at eget metus.
-                Nullam id dolor id nibh ultricies vehicula ut id elit.
+                {{ activity.description }}
             </p>
-            <p><a href="{{ path('activity_detail', {'id': activity.id}) }}" class="btn btn-primary" role="button">Voir</a></p>
+            <p>
+                <a href="{{ path('activity_detail', {'id': activity.id}) }}" class="btn btn-primary" role="button">
+                    <span class="glyphicon glyphicon-info-sign"></span> &nbsp; En savoir plus
+                </a>
+            </p>
         </div>
     </div>
 </div>

@@ -2,6 +2,18 @@
 
 {% block content %}
 
-    <p>{{ app.user.username }}</p>
+    <h2>Votre compte</h2>
+
+    <div>
+        <p>{{ app.user.username }}</p>
+        <p>{{ app.user.email }}</p>
+        <p>{{ app.user.firstName }}</p>
+        <p>{{ app.user.lastName }}</p>
+        <p>{{ app.user.birthday|date("d/m/Y") }}</p>
+        <p>{{ app.user.phoneNumber }}</p>
+        <p>{{ app.user.profilePicture }}</p>
+        <p>{{ app.user.description }}</p>
+        <p>{{ app.user.fidelity }}</p>
+    </div>
 
 {% endblock %}
