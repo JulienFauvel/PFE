@@ -102,6 +102,14 @@ class Category
         $this->displayName = $displayName;
     }
 
+    public function addActivity(Activity $activity)
+    {
+        $this->activities[] = $activity;
+        $activity->setCategory($this);
+
+        return $this;
+    }
+
 
     /**
      * @return ArrayCollection
@@ -117,6 +125,11 @@ class Category
     public function setActivities(ArrayCollection $activities)
     {
         $this->activities = $activities;
+    }
+
+    function __toString()
+    {
+        return $this->getDisplayName();
     }
 
 

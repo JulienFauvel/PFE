@@ -61,7 +61,7 @@ class RegistrationController extends BaseController
             $exist = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('AppBundle:User')
-                ->loadUserByMail($user->getEmail());
+                ->loadUserByEmail($user->getEmail());
 
             if($exist !== null) {
                 $request->getSession()
