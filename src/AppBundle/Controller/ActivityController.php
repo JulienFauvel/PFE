@@ -24,24 +24,13 @@ class ActivityController extends Controller
      */
     public function newAction(Request $request)
     {
-        $categories = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Category')
-            ->getCategories();
 
-        $form = $this->createForm(ActivityType::class, null, array(
-            'categories' => $categories
-        ));
+        $form = $this->createForm(ActivityType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $activity = $form->getData();
             $activity->setUser($this->getUser());
-
-//            $catId = $this->getDoctrine()
-//                ->getManager()
-//                ->getRepository('AppBundle:Category')
-//                ->getCategoryByDisplayName($activity->category);
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
@@ -58,7 +47,6 @@ class ActivityController extends Controller
             [
                 'default_cat' => $request->get('c'),
                 'form' => $form->createView(),
-                'categories' => $categories,
             ]
         );
     }
