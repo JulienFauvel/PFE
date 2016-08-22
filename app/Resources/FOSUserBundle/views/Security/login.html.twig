@@ -2,6 +2,11 @@
 
 {% block title %}Login{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/custom_login_button.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}"/>
+{% endblock %}
+
 {% block meta %}
     <meta name="google-signin-client_id" content="109335240896-7rskloeu9f69ojkmkr4rbae7gq1rbti2.apps.googleusercontent.com">
 {% endblock %}
@@ -13,10 +18,25 @@
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <div style="block:inline;">
-            <a href="/login/google"><button class="btn btn-default">Google</button></a>
-            <a href="/login/facebook"><button class="btn btn-default">Facebook</button></a>
+
+        <div style="display:inline-block;">
+            <span class="label">Sign in with:</span>
+            <a href="/login/google">
+                <div id="customBtn" class="customGPlusSignIn">
+                    <span class="icon"></span>
+                    <span class="buttonText">Google</span>
+                </div>
+            </a>
+            <a href="/login/facebook">
+                <div id="fbSignInWrapper">
+                    <div class="logoFb"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    <span class="buttonText">Facebook</span>
+                </div>
+            </a>
         </div>
+
+        <br/>
+        <br/>
 
         <form class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />

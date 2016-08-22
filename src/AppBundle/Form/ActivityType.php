@@ -22,7 +22,7 @@ class ActivityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $categories = $options['categories'];
+        //$categories = $options['categories'];
 
         $builder
             ->add('title', TextType::class)
@@ -31,15 +31,7 @@ class ActivityType extends AbstractType
             ->add('city', TextType::class)
             ->add('postalCode', TextType::class)
             ->add('country', TextType::class)
-            ->add('category', ChoiceType::class, [
-                'choices' => $categories,
-                'choice_label' => function($category) {
-                    return $category->getDisplayName();
-                }
-            ])
-            ->add('tags', CollectionType::class, array(
-                'entry_type' => TextType::class
-            ))
+            ->add('category', null)
             ->add('valider', SubmitType::class)
         ;
     }
