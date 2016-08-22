@@ -43,7 +43,7 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
     /**
      * Return the user with the mail
      *
-     * @param string $mail
+     * @param string $email
      * @return User
      */
     public function loadUserByEmail($email)

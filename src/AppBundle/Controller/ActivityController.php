@@ -30,17 +30,18 @@ class ActivityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $activity = $form->getData();
-            $activity->setUser($this->getUser());
+            $this->getUser()->addActivity($activity);
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
+            $em->persist($this->getUser());
             $em->flush();
 
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', 'Création réussie !');
 
-            return $this->redirectToRoute('my_activity');
+            return $this->redirectToRoute('my_activities');
         }
 
         return $this->render('activity/new.html.twig',

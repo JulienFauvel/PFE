@@ -40,7 +40,7 @@ class ProfileController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivitiesByUser($this->getUser()->getId());
 
-        return $this->render('myactivities.html.twig', [
+        return $this->render('profile/myactivities.html.twig', [
            'activities' => $activities
         ]);
     }

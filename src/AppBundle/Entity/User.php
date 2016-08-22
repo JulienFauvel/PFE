@@ -181,6 +181,14 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
         $this->posts = $posts;
     }
 
+    public function addActivity(Activity $activity)
+    {
+        $this->activities[] = $activity;
+        $activity->setUser($this);
+
+        return $this;
+    }
+
     /**
      * @return Activity[]
      */

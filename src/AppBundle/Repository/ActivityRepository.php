@@ -76,10 +76,10 @@ class ActivityRepository extends EntityRepository
      * @param integer $id ID of the user
      * @return array
      */
-    public function getActivitiesByUser($id)
+    public function getActivitiesByUser(int $id)
     {
         return $this->createQueryBuilder('a')
-            ->where('a.user_id = :id')
+            ->where('a.user = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
