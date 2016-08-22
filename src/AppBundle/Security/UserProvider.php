@@ -40,22 +40,17 @@ class UserProvider extends BaseClass
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
+        $email = $response->getEmail();
         $username = $response->getUsername();
 
         /** @var User $user */
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $email));
 
         //when the user is registrating
         if ($user === null) {
 
             //Récupération du type d'OAuth (Facebook ou Google)
             $service = $response->getResourceOwner()->getName();
-
-            //TODO : tester si l'email existe déjà
-            $exist = $this->userManager->findUserByEmail($user->getEmail());
-            if($exist !== null) {
-                return null;
-            }
 
             //Génération des setters
             $setter = 'set'.ucfirst($service);
