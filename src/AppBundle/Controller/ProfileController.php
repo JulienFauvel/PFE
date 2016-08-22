@@ -26,4 +26,22 @@ class ProfileController extends Controller
         return $this->render('profile/index.html.twig');
     }
 
+    /**
+     * My activities Action
+     *
+     * @Route("/profile/activities", name="my_activities")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function myActivitiesAction(Request $request)
+    {
+        $activities = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Activity')
+            ->getActivitiesByUser($this->getUser()->getId());
+
+        return $this->render('myactivities.html.twig', [
+           'activities' => $activities
+        ]);
+    }
 }

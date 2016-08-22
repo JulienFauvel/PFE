@@ -59,7 +59,7 @@ class ActivityRepository extends EntityRepository
      * Get the activities by category name
      *
      * @param string $name
-     * @return mixed
+     * @return array
      */
     public function getActivitiesByCategory($name)
     {
@@ -67,6 +67,20 @@ class ActivityRepository extends EntityRepository
             ->join('a.category', 'c')
             ->where('c.name = :name')
             ->setParameter('name', $name)
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * Get the activities by category name
+     * @param integer $id ID of the user
+     * @return array
+     */
+    public function getActivitiesByUser($id)
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.user_id = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getResult();
     }

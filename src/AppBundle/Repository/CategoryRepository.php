@@ -18,7 +18,22 @@ class CategoryRepository extends EntityRepository
     {
         return $this->createQueryBuilder('cat')
             ->getQuery()
-            ->getArrayResult();
+            ->getResult();
+    }
+
+    /**
+     * Return the category by its Display Name
+     *
+     * @param string $displayName
+     * @return Category|null
+     */
+    public function getCategoryByDisplayName(string $displayName)
+    {
+        return $this->createQueryBuilder('cat')
+            ->where('cat.display_name = :displayName')
+            ->setParameter('displayName', $displayName)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
 }

@@ -15,12 +15,9 @@ class EvaluationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('comment')
             ->add('score')
             ->add('budget')
-            ->add('createAt', 'datetime')
-            ->add('editedAt', 'datetime')
-            ->add('user')
+            ->add('comment')
             ->add('activity')
         ;
     }

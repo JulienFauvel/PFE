@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\ActivityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,10 +29,36 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Category')
             ->getCategories();
 
+        $form = $this->createForm(ActivityType::class, null, array(
+            'categories' => $categories
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $activity = $form->getData();
+            $activity->setUser($this->getUser());
+
+//            $catId = $this->getDoctrine()
+//                ->getManager()
+//                ->getRepository('AppBundle:Category')
+//                ->getCategoryByDisplayName($activity->category);
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($activity);
+            $em->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Création réussie !');
+
+            return $this->redirectToRoute('my_activity');
+        }
+
         return $this->render('activity/new.html.twig',
             [
                 'default_cat' => $request->get('c'),
-                'categories' => $categories
+                'form' => $form->createView(),
+                'categories' => $categories,
             ]
         );
     }

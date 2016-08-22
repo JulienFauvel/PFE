@@ -16,8 +16,6 @@ class SubjectType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('createAt', 'datetime')
-            ->add('user')
         ;
     }
     

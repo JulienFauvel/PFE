@@ -2,30 +2,45 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Category;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ActivityType extends AbstractType
 {
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $categories = $options['categories'];
+
         $builder
-            ->add('title')
-            ->add('description')
-            ->add('street')
-            ->add('city')
-            ->add('postalCode')
-            ->add('country')
-            ->add('editedAt', 'datetime')
-            ->add('createAt', 'datetime')
-            ->add('user')
-            ->add('category')
-            ->add('tags')
+            ->add('title', TextType::class)
+            ->add('description', TextareaType::class)
+            ->add('street', TextType::class)
+            ->add('city', TextType::class)
+            ->add('postalCode', TextType::class)
+            ->add('country', TextType::class)
+            ->add('category', ChoiceType::class, [
+                'choices' => $categories,
+                'choice_label' => function($category) {
+                    return $category->getDisplayName();
+                }
+            ])
+            ->add('tags', CollectionType::class, array(
+                'entry_type' => TextType::class
+            ))
+            ->add('valider', SubmitType::class)
         ;
     }
     
@@ -35,7 +50,8 @@ class ActivityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Activity'
+            'data_class' => 'AppBundle\Entity\Activity',
+            'categories' => array(),
         ));
     }
 }

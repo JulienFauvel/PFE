@@ -180,7 +180,7 @@ class Activity
     /**
      * @param Category $category
      */
-    public function setCategories($category)
+    public function setCategory($category)
     {
         $this->category = $category;
     }
@@ -188,7 +188,7 @@ class Activity
     /**
      * @return Tag[]
      */
-    public function getTags(): array
+    public function getTags()
     {
         return $this->tags;
     }
@@ -196,7 +196,7 @@ class Activity
     /**
      * @param Tag[] $tags
      */
-    public function setTags(array $tags)
+    public function setTags($tags)
     {
         $this->tags = $tags;
     }
@@ -204,7 +204,7 @@ class Activity
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }
