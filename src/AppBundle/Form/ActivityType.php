@@ -2,10 +2,7 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Category;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,8 +19,6 @@ class ActivityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        //$categories = $options['categories'];
-
         $builder
             ->add('title', TextType::class)
             ->add('description', TextareaType::class)
@@ -42,8 +37,7 @@ class ActivityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Activity',
-            'categories' => array(),
+            'data_class' => 'AppBundle\Entity\Activity'
         ));
     }
 }
