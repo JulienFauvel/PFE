@@ -24,7 +24,6 @@ class UserProvider extends BaseClass
         $setter_token = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
-        /** @var  */
         if (($previousUser = $this->userManager->findUserBy(array($property => $username)) !== null)) {
             $previousUser->$setter_id(null);
             $previousUser->$setter_token(null);
@@ -53,6 +52,10 @@ class UserProvider extends BaseClass
             $service = $response->getResourceOwner()->getName();
 
             //TODO : tester si l'email existe déjà
+            $exist = $this->userManager->findUserByEmail($user->getEmail());
+            if($exist !== null) {
+                return null;
+            }
 
             //Génération des setters
             $setter = 'set'.ucfirst($service);

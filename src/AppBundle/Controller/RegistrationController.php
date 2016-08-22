@@ -57,6 +57,20 @@ class RegistrationController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
+            //Test si l'adresse mail est déjà utilisée
+            $exist = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('AppBundle:User')
+                ->loadUserByMail($user->getEmail());
+
+            if($exist !== null) {
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('error', 'Un compte existe déjà avec l\'adresse mail '.$user->getEmail());
+
+                return $this->redirectToRoute('homepage');
+            }
+
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
