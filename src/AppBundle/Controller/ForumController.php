@@ -31,4 +31,16 @@ class ForumController extends Controller
             array('subjects' => $subjects));
     }
 
+    /**
+     * Index action
+     *
+     * @Route("/forum/regles", name="forum_regles")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexReglesAction(Request $request)
+    {
+        return $this->render('forum/regles.html.twig');
+    }
+
 }
