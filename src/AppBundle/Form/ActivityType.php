@@ -35,6 +35,9 @@ class ActivityType extends AbstractType
                 'choices' => $categories,
                 'choice_label' => function($category) {
                     return $category->getDisplayName();
+                },
+                'choice_value' => function($cat) {
+                    return $cat->getId();
                 }
             ])
             ->add('tags', CollectionType::class, array(
