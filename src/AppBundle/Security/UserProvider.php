@@ -24,7 +24,6 @@ class UserProvider extends BaseClass
         $setter_token = $setter.'AccessToken';
 
         //we "disconnect" previously connected users
-        /** @var  */
         if (($previousUser = $this->userManager->findUserBy(array($property => $username)) !== null)) {
             $previousUser->$setter_id(null);
             $previousUser->$setter_token(null);
