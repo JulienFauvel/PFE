@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 class ActivityController extends Controller
 {
 
-
     /**
      * New action
      *
