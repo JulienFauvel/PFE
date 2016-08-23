@@ -61,6 +61,7 @@ class ActivityController extends Controller
      */
     public function updateAction($id)
     {
+        $request = $this->get('request');
 
         if($id === null) {
             return $this->redirectToRoute('activity_new');
@@ -81,6 +82,7 @@ class ActivityController extends Controller
         }
 
         $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $activity = $form->getData();
