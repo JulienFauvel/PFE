@@ -97,7 +97,7 @@ class ActivityController extends Controller
         }
 
         return $this->render('activity/edit.html.twig',[
-            'form' => $form
+            'form' => $form->createView()
         ]);
     }
 
