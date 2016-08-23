@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
 
+
+
 {% block content %}
 
     <h3>{{ subject.name }}</h3>
@@ -10,5 +12,9 @@
             <p>{{ post.content }}</p>
         </div>
     {% endfor %}
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}

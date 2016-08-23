@@ -2,16 +2,31 @@
 
 {% block content %}
 
-<div>
-    <h2>Bienvenue la section Forum</h2>
-    <p>Vous pouvez ici partager tout ce qui vous voulez en dehors des thèmes principaux.</p>
-    <p><a class="btn btn-primary btn-lg" href="{{ path('forum_regles') }}" role="button">Règles du forum</a></p>
-</div>
-
-{% for subject in subjects %}
     <div>
-        <a href="{{ path('subject_show', {'id': subject.id}) }}">{{ subject.name }}</a>
+        <h2>Bienvenue la section Forum</h2>
+        <p>Vous pouvez ici partager tout ce qui vous voulez en dehors des thèmes principaux.</p>
+        <p><a class="btn btn-primary" href="{{ path('forum_regles') }}" role="button">Règles du forum</a></p>
     </div>
-{% endfor %}
+
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Sujet</th>
+            <th>Auteur</th>
+            <th>Dernière mise à jour</th>
+        </th>
+        {% for subject in subjects %}
+                <tr>
+                    <td>
+                        <a href="{{ path('subject_show', {'id': subject.id}) }}">
+                            {{ subject.name }}
+                        </a>
+                    </td>
+                    <td><a href="{{ path('profile_show', {'id': subject.user.id}) }}">{{ subject.user.username }}</a></td>
+                    <td>{{ subject.createdAt|date("d/m/Y H:i:s") }}</td>
+                </tr>
+        {% endfor %}
+    </table>
+
+    <p><a class="btn btn-info" href="{{ path('subject_new') }}" role="button">Créer un nouveau sujet</a></p>
 
 {% endblock %}

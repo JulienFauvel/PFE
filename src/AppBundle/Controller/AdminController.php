@@ -24,7 +24,7 @@ class AdminController extends Controller
     {
         $users = $this->getDoctrine()
             ->getRepository('AppBundle:User')
-            ->loadUsers();
+            ->getUsers();
 
         return $this->render('admin/index.html.twig', [
             'users' => $users,

@@ -16,9 +16,11 @@ class SubjectRepository extends EntityRepository
      */
     public function getSubjects()
     {
-        return $this->createQueryBuilder('subject')
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.createdAt', 'DESC')
+            ->addOrderBy('s.editedAt', 'DESC')
             ->getQuery()
-            ->getArrayResult();
+            ->getResult();
     }
 
     /**

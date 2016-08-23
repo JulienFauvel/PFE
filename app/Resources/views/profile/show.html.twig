@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h2>{{ user.username }}</h2>
+
+    <div>
+        <p>{{ user.username }}</p>
+        <p>{{ user.firstName }}</p>
+        <p>{{ user.lastName }}</p>
+        <p>{{ user.birthday|date("d/m/Y") }}</p>
+        <p>{{ user.profilePicture }}</p>
+        <p>{{ user.description }}</p>
+        <p>{{ user.fidelity }}</p>
+    </div>
+
+    <div>
+        <a href="{{ path('my_activities') }}">Ses activités créées</a>
+        <a href="{{ path('my_subjects') }}">Ses sujets créés</a>
+    </div>
+
+{% endblock %}

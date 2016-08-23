@@ -23,7 +23,32 @@ class ProfileController extends Controller
      */
     public function indexAction(Request $request)
     {
+        /*
+        if(!$this->isGranted('ROLE_USER'))
+        {
+            return $this->redirectToRoute('homepage');
+        }
+        */
+
         return $this->render('profile/index.html.twig');
+    }
+
+    /**
+     * Show action
+     * @Route("/profile/{id}", name="profile_show")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction($id)
+    {
+        $user = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:User')
+            ->getUser($id);
+
+        return $this->render('profile/show.html.twig', [
+           'user' => $user
+        ]);
     }
 
     /**

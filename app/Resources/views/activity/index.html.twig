@@ -1,10 +1,21 @@
 {% extends 'layout.html.twig' %}
 
+{% block javascripts %}
+    <script>
+        $(document).ready(function(){
+            var button = document.getElementById('button_create');
+            button.addEventListener("touchstart", function () {
+                console.log("OK");
+            }, false);
+        });
+    </script>
+{% endblock %}
+
 {% block stylesheets %}
     <style>
         .add_button {
             margin-top: 20px;
-            margin-bottom: 0;
+            margin-bottom: 10px;
         }
     </style>
 {% endblock %}
@@ -15,11 +26,11 @@
         <div class="col-md-6 col-xs-11">
             <h2>{{ category.displayName }}</h2>
         </div>
-        <a href="{{ path('activity_new', {'c': category.name}) }}">
-            <div class="col-md-1 col-md-offset-5 col-xs-1 add_button">
-                <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
-            </div>
-        </a>
+        <div class="col-md-1 col-md-offset-5 col-xs-1 add_button">
+            <a id="button_create" href="{{ path('activity_new', {'c': category.name}) }}" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
     </div>
 
     <div class="col-md-12 col-xs-12">

@@ -54,7 +54,14 @@ class Subject
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createAt;
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="edited_at", type="datetime", nullable=true)
+     */
+    private $editedAt;
 
 
     /**
@@ -63,7 +70,7 @@ class Subject
     public function __construct()
     {
         $this->posts = new ArrayCollection();
-        $this->createAt = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -90,6 +97,7 @@ class Subject
     {
         $this->posts->add($post);
         $post->setSubject($this);
+        $this->setEditedAt(new \DateTime());
 
         return $this;
     }
@@ -132,6 +140,7 @@ class Subject
     public function setName($name)
     {
         $this->name = $name;
+        $this->setEditedAt(new \DateTime());
 
         return $this;
     }
@@ -149,18 +158,36 @@ class Subject
     /**
      * @return \DateTime
      */
-    public function getCreateAt()
+    public function getCreatedAt()
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createAt
+     * @param \DateTime $createdAt
      */
-    public function setCreateAt($createAt)
+    public function setCreatedAt($createdAt)
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEditedAt()
+    {
+        return $this->editedAt;
+    }
+
+    /**
+     * @param \DateTime $editedAt
+     */
+    public function setEditedAt(\DateTime $editedAt)
+    {
+        $this->editedAt = $editedAt;
+    }
+
+
 
 }
 

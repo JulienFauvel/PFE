@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\ActivityType;
+use AppBundle\Form\PostType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -122,12 +123,16 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivity($id);
 
+        //$form = $this->createForm(PostType::class);
+
         if($activity === null) {
             throw $this->createNotFoundException("The activity doesn't exist");
         }
 
-        return $this->render('activity/show.html.twig',
-            ['activity' => $activity]);
+        return $this->render('activity/show.html.twig', [
+            'activity' => $activity,
+            'form'
+        ]);
     }
 
     /**
