@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Form\SubjectType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -142,6 +143,10 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         parent::__construct();
+        $this->subjects = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->activities = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
         $this->setRoles(array(self::ROLE_USER));
         $this->fidelity = 0;
         $this->enabled = true;
@@ -157,14 +162,14 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
      */
     public function addSubject($subject)
     {
-        $this->subjects[] = $subject;
+        $this->subjects->add($subject);
         $subject->setUser($this);
 
         return $this;
     }
 
     /**
-     * @return Subject[]
+     * @return ArrayCollection
      */
     public function getSubjects()
     {
@@ -172,7 +177,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param Subject[] $subjects
+     * @param ArrayCollection $subjects
      */
     public function setSubjects($subjects)
     {
@@ -185,14 +190,14 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
      */
     public function addPost($post)
     {
-        $this->posts[] = $post;
+        $this->posts->add($post);
         $post->setUser($this);
 
         return $this;
     }
 
     /**
-     * @return Post[]
+     * @return ArrayCollection
      */
     public function getPosts()
     {
@@ -200,23 +205,27 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param Post[] $posts
+     * @param ArrayCollection $posts
      */
     public function setPosts($posts)
     {
         $this->posts = $posts;
     }
 
+    /**
+     * @param Activity $activity
+     * @return $this
+     */
     public function addActivity(Activity $activity)
     {
-        $this->activities[] = $activity;
+        $this->activities->add($activity);
         $activity->setUser($this);
 
         return $this;
     }
 
     /**
-     * @return Activity[]
+     * @return ArrayCollection
      */
     public function getActivities()
     {
@@ -224,7 +233,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param Activity[] $activities
+     * @param ArrayCollection $activities
      */
     public function setActivities($activities)
     {
@@ -232,7 +241,19 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @return Evaluation
+     * @param Evaluation $evaluation
+     * @return $this
+     */
+    public function addEvaluation($evaluation)
+    {
+        $this->evaluations->add($evaluation);
+        $evaluation->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
      */
     public function getEvaluations()
     {
@@ -240,7 +261,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * @param Evaluation[] $evaluations
+     * @param ArrayCollection $evaluations
      */
     public function setEvaluations($evaluations)
     {

@@ -88,7 +88,8 @@ class Subject
      */
     public function addPost(Post $post)
     {
-        $this->posts[] = $post;
+        $this->posts->add($post);
+        $post->setSubject($this);
 
         return $this;
     }

@@ -10,7 +10,7 @@
 
 {% for subject in subjects %}
     <div>
-        {{ subject.name }}
+        <a href="{{ path('subject_show', {'id': subject.id}) }}">{{ subject.name }}</a>
     </div>
 {% endfor %}
 

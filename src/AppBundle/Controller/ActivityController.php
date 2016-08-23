@@ -84,7 +84,12 @@ class ActivityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var $activity */
             $activity = $form->getData();
+            $description = $activity->getDescription();
+            $description = preg_replace('</\s+script\s+>/', '&glt;script&lt;', $description);
+            $activity->setDescription($description);
+
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);

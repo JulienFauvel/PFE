@@ -29,7 +29,7 @@ class SubjectController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $obj = $form->getData();
-            var_dump($obj);
+
             $post = new Post();
             $post->setContent($obj['post']);
 

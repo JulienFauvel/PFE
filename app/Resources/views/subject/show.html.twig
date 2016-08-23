@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <h3>{{ subject.name }}</h3>
+
+    {% for post in subject.posts %}
+        <div>
+            <h4>{{ post.user.username }}</h4>
+            <p>{{ post.content }}</p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

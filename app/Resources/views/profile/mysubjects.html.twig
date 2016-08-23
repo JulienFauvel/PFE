@@ -5,6 +5,7 @@
     <h2>Mes créations</h2>
 
     {% for subject in subjects %}
+        <a href="{{ path('subject_show', {'id': subject.id}) }}"><h4>{{ subject.name }}</h4></a>
     {% endfor %}
 
 

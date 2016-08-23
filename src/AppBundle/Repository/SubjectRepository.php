@@ -9,11 +9,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class SubjectRepository extends EntityRepository
 {
+    /**
+     * Get all subjects
+     *
+     * @return array
+     */
     public function getSubjects()
     {
         return $this->createQueryBuilder('subject')
             ->getQuery()
             ->getArrayResult();
+    }
+
+    /**
+     *
+     */
+    public function getSubject($id)
+    {
+        return $this->createQueryBuilder('subject')
+            ->where('subject.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     /**
