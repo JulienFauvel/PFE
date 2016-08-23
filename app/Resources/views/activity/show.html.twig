@@ -8,7 +8,7 @@
 
 
     <div class="col-md-6 col-sm-12">
-        {{ activity.description|raw }}
+        {{ activity.description|replace({'<script>': '&lt;script&gt;', '</script>': '&lt;/script&gt;'})|raw }}
     </div>
 
     <div class="col-md-6 col-sm-12">
