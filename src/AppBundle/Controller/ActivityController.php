@@ -34,21 +34,7 @@ class ActivityController extends Controller
             $this->getUser()->addActivity($activity);
 
             $description = $activity->getDescription();
-            $dom = new \DOMDocument();
-            $dom->loadHTML($description);
-            $script = $dom->getElementsByTagName('script');
-            $remove = [];
-            foreach ($script as $item)
-            {
-                $remove[] = $item;
-            }
-
-            foreach ($remove as $item)
-            {
-                $item->parentNode->removeChild($item);
-            }
-
-            $description = $dom->saveHTML();
+            $description = $this->removeScript($description);
             $activity->setDescription($description);
 
             $em = $this->getDoctrine()->getEntityManager();
@@ -109,21 +95,7 @@ class ActivityController extends Controller
 
             $activity = $form->getData();
             $description = $activity->getDescription();
-            $dom = new \DOMDocument();
-            $dom->loadHTML($description);
-            $script = $dom->getElementsByTagName('script');
-            $remove = [];
-            foreach ($script as $item)
-            {
-                $remove[] = $item;
-            }
-
-            foreach ($remove as $item)
-            {
-                $item->parentNode->removeChild($item);
-            }
-
-            $description = $dom->saveHTML();
+            $description = $this->removeScript($description);
             $activity->setDescription($description);
 
 
@@ -284,6 +256,26 @@ class ActivityController extends Controller
                 'category' => $cat
             ]
         );
+    }
+
+
+    private function removeScript($html)
+    {
+        $dom = new \DOMDocument();
+        $dom->loadHTML($html);
+        $script = $dom->getElementsByTagName('script');
+        $remove = [];
+        foreach ($script as $item)
+        {
+            $remove[] = $item;
+        }
+
+        foreach ($remove as $item)
+        {
+            $item->parentNode->removeChild($item);
+        }
+
+        return $dom->saveHTML();
     }
 
 
