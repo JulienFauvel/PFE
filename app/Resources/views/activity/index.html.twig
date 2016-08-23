@@ -15,11 +15,11 @@
         <div class="col-md-6 col-xs-11">
             <h2>{{ category.displayName }}</h2>
         </div>
-        <div class="col-md-1 col-md-offset-5 col-xs-1 add_button">
-            <a href="{{ path('activity_new', {'c': category.name}) }}">
+        <a href="{{ path('activity_new', {'c': category.name}) }}">
+            <div class="col-md-1 col-md-offset-5 col-xs-1 add_button">
                 <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 
     <div class="col-md-12 col-xs-12">
