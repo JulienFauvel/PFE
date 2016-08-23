@@ -44,7 +44,7 @@
                     {% if app.user %}
 
                         {% if app.user.profilePicture %}
-                            <li><a href="{{ path('profile') }}" alt="profile"><img src="{{ app.user.profilePicture }}" height="20" alt="image_profile"/></a></li>
+                            <li><a href="{{ path('profile') }}"><img src="{{ app.user.profilePicture }}" height="20" alt="image_profile"/></a></li>
                         {% endif %}
 
                         <li><a href="{{ path('profile') }}">{{ app.user.username }}</a></li>

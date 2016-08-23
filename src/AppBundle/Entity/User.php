@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Form\SubjectType;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
@@ -150,6 +151,19 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
+     * Add a subject to the user
+     * @param Subject $subject
+     * @return User $this
+     */
+    public function addSubject($subject)
+    {
+        $this->subjects[] = $subject;
+        $subject->setUser($this);
+
+        return $this;
+    }
+
+    /**
      * @return Subject[]
      */
     public function getSubjects()
@@ -163,6 +177,18 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function setSubjects($subjects)
     {
         $this->subjects = $subjects;
+    }
+
+    /**
+     * @param Post $post
+     * @return $this
+     */
+    public function addPost($post)
+    {
+        $this->posts[] = $post;
+        $post->setUser($this);
+
+        return $this;
     }
 
     /**

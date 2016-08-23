@@ -44,4 +44,23 @@ class ProfileController extends Controller
            'activities' => $activities
         ]);
     }
+
+    /**
+     * My subjects Action
+     *
+     * @Route("/profile/subjects", name="my_subjects")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function mySubjectsAction(Request $request)
+    {
+        $subjects = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Subject')
+            ->getSubjectsByUser($this->getUser()->getId());
+
+        return $this->render('profile/mysubjects.html.twig', [
+           'subjects' => $subjects
+        ]);
+    }
 }

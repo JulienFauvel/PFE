@@ -174,7 +174,7 @@ class ActivityController extends Controller
 
         if($cat === null)
         {
-            return $this->redirectToRoute('activity_new', ['c' => 'bonplan']);
+            return $this->redirectToRoute('activity_new', ['c' => 'bon_plan']);
         }
 
         return $this->render('activity/index.html.twig',
