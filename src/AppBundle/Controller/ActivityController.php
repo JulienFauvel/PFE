@@ -32,8 +32,23 @@ class ActivityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $activity = $form->getData();
             $this->getUser()->addActivity($activity);
+
             $description = $activity->getDescription();
-            $description = preg_replace('/<\s+script\s+>/', '&glt;script&lt;', $description);
+            $dom = new \DOMDocument();
+            $dom->loadHTML($description);
+            $script = $dom->getElementsByTagName('script');
+            $remove = [];
+            foreach ($script as $item)
+            {
+                $remove[] = $item;
+            }
+
+            foreach ($remove as $item)
+            {
+                $item->parentNode->removeChild($item);
+            }
+
+            $description = $dom->saveHTML();
             $activity->setDescription($description);
 
             $em = $this->getDoctrine()->getEntityManager();
@@ -94,7 +109,21 @@ class ActivityController extends Controller
 
             $activity = $form->getData();
             $description = $activity->getDescription();
-            $description = preg_replace('/<\s+script\s+>/', '&glt;script&lt;', $description);
+            $dom = new \DOMDocument();
+            $dom->loadHTML($description);
+            $script = $dom->getElementsByTagName('script');
+            $remove = [];
+            foreach ($script as $item)
+            {
+                $remove[] = $item;
+            }
+
+            foreach ($remove as $item)
+            {
+                $item->parentNode->removeChild($item);
+            }
+
+            $description = $dom->saveHTML();
             $activity->setDescription($description);
 
 
