@@ -9,7 +9,7 @@
                 {{ activity.description|replace({'<script>': '&lt;script&gt;', '</script>': '&lt;/script&gt;'})|raw }}
             </p>
             <p>
-                <a href="{{ path('activity_detail', {'id': activity.id}) }}" class="btn btn-primary" role="button">
+                <a href="{{ path('activity_show', {'id': activity.id}) }}" class="btn btn-primary" role="button">
                     <span class="glyphicon glyphicon-info-sign"></span> &nbsp; En savoir plus
                 </a>
                 <a href="{{ path('activity_edit', {'id': activity.id}) }}" class="btn btn-success" role="button">

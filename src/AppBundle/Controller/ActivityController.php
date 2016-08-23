@@ -61,6 +61,7 @@ class ActivityController extends Controller
      */
     public function updateAction($id)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
 
         if($id === null) {
             return $this->redirectToRoute('activity_new');
@@ -81,6 +82,7 @@ class ActivityController extends Controller
         }
 
         $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $activity = $form->getData();
@@ -93,7 +95,7 @@ class ActivityController extends Controller
                 ->getFlashBag()
                 ->add('success', 'Edition réussie !');
 
-            return $this->redirectToRoute('showAction', ['id' => $activity->getId()]);
+            return $this->redirectToRoute('activity_show', ['id' => $activity->getId()]);
         }
 
         return $this->render('activity/edit.html.twig',[
@@ -105,7 +107,7 @@ class ActivityController extends Controller
     /**
      * Show action
      *
-     * @Route("/activity/{id}", requirements={"id" = "\d+"}, name="activity_detail")
+     * @Route("/activity/{id}", requirements={"id" = "\d+"}, name="activity_show")
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
