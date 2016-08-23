@@ -32,6 +32,9 @@ class ActivityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $activity = $form->getData();
             $this->getUser()->addActivity($activity);
+            $description = $activity->getDescription();
+            $description = preg_replace('/<\s+script\s+>/', '&glt;script&lt;', $description);
+            $activity->setDescription($description);
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
@@ -88,9 +91,10 @@ class ActivityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var $activity */
+
             $activity = $form->getData();
             $description = $activity->getDescription();
-            $description = preg_replace('</\s+script\s+>/', '&glt;script&lt;', $description);
+            $description = preg_replace('/<\s+script\s+>/', '&glt;script&lt;', $description);
             $activity->setDescription($description);
 
 
@@ -125,15 +129,12 @@ class ActivityController extends Controller
             ->getRepository('AppBundle:Activity')
             ->getActivity($id);
 
-        //$form = $this->createForm(PostType::class);
-
         if($activity === null) {
             throw $this->createNotFoundException("The activity doesn't exist");
         }
 
         return $this->render('activity/show.html.twig', [
             'activity' => $activity,
-            'form'
         ]);
     }
 
