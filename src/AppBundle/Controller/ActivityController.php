@@ -52,6 +52,55 @@ class ActivityController extends Controller
         );
     }
 
+    /**
+     * New action
+     *
+     * @Route("/activity/edit/{id}", name="activity_edit")
+     * @param integer $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAction($id)
+    {
+
+        if($id === null) {
+            return $this->redirectToRoute('activity_new');
+        }
+
+        $activity = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Category')
+            ->getActivity($id);
+
+        //Test si l'utilisateur est bien le créateur de l'activité
+        if($activity->getUser()->getId() !== $this->getUser()->getId()) {
+            $this->get('session')
+                ->getFlashBag()
+                ->add('error', 'Vous n\'avez pas créé cette activité');
+
+            return $this->redirectToRoute('my_activities');
+        }
+
+        $form = $this->createForm(ActivityType::class, $activity);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $activity = $form->getData();
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($activity);
+            $em->flush();
+
+            $this->get('session')
+                ->getFlashBag()
+                ->add('success', 'Edition réussie !');
+
+            return $this->redirectToRoute('showAction', ['id' => $activity->getId()]);
+        }
+
+        return $this->render('activity/edit.html.twig',[
+            'form' => $form
+        ]);
+    }
+
 
     /**
      * Show action
