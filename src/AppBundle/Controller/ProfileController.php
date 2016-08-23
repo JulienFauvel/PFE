@@ -6,6 +6,7 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Class ProfileController
@@ -18,24 +19,18 @@ class ProfileController extends Controller
      * Index action
      *
      * @Route("/profile", name="profile")
+     * @Security("has_role('ROLE_USER')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
-        /*
-        if(!$this->isGranted('ROLE_USER'))
-        {
-            return $this->redirectToRoute('homepage');
-        }
-        */
-
         return $this->render('profile/index.html.twig');
     }
 
     /**
      * Show action
-     * @Route("/profile/{id}", name="profile_show")
+     * @Route("/profile/{id}", name="profile_show", requirements={"id": "\d+"})
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */

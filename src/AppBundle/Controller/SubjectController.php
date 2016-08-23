@@ -6,11 +6,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Subject;
 use AppBundle\Form\SubjectPostType;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Request;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class SubjectController extends Controller
 {
@@ -19,6 +18,7 @@ class SubjectController extends Controller
      * New action
      *
      * @Route("/forum/subject/new", name="subject_new")
+     * @Security("has_role('ROLE_USER')")
      * @param $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */

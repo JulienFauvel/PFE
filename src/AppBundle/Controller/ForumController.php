@@ -34,7 +34,7 @@ class ForumController extends Controller
     /**
      * Show action
      *
-     * @Route("/forum/subject/show/{id}", name="subject_show")
+     * @Route("/forum/subject/show/{id}", name="subject_show", requirements={"id": "\d+"})
      * @param integer $id
      * @return \Symfony\Component\HttpFoundation\Response
      */

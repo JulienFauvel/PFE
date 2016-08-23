@@ -27,6 +27,8 @@
         {% endfor %}
     </table>
 
-    <p><a class="btn btn-info" href="{{ path('subject_new') }}" role="button">Créer un nouveau sujet</a></p>
+    {% if app.user %}
+        <p><a class="btn btn-info" href="{{ path('subject_new') }}" role="button">Créer un nouveau sujet</a></p>
+    {% endif %}
 
 {% endblock %}

@@ -3,10 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Form\ActivityType;
-use AppBundle\Form\PostType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Class ActivityController
@@ -19,6 +19,7 @@ class ActivityController extends Controller
      * New action
      *
      * @Route("/activity/new", name="activity_new")
+     * @Security("has_role('ROLE_USER')")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -53,9 +54,10 @@ class ActivityController extends Controller
     }
 
     /**
-     * New action
+     * Edit action
      *
-     * @Route("/activity/edit/{id}", name="activity_edit")
+     * @Route("/activity/edit/{id}", name="activity_edit", requirements={"id": "\d+"})
+     * @Security("has_role('ROLE_USER')")
      * @param integer $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -112,7 +114,7 @@ class ActivityController extends Controller
     /**
      * Show action
      *
-     * @Route("/activity/{id}", requirements={"id" = "\d+"}, name="activity_show")
+     * @Route("/activity/{id}", name="activity_show", requirements={"id": "\d+"})
      * @param int $id
      * @return \Symfony\Component\HttpFoundation\Response
      */

@@ -40,7 +40,7 @@ class SubjectRepository extends EntityRepository
      * @param integer $id ID of the user
      * @return array
      */
-    public function getSubjectsByUser(int $id)
+    public function getSubjectsByUser($id)
     {
         return $this->createQueryBuilder('s')
             ->where('s.user = :id')
