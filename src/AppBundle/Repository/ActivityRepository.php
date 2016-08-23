@@ -73,7 +73,7 @@ class ActivityRepository extends EntityRepository
     }
 
     /**
-     * Get the activities by category name
+     * Get the activities by User
      * @param integer $id ID of the user
      * @return array
      */

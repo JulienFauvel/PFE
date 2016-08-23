@@ -53,7 +53,7 @@ class Post
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="edited_at", type="datetime")
+     * @ORM\Column(name="edited_at", type="datetime", nullable=true)
      */
     private $editedAt;
 
@@ -64,6 +64,7 @@ class Post
     {
         $this->createdAt = new \DateTime();
     }
+
 
     /**
      * @return User
@@ -80,8 +81,6 @@ class Post
     {
         $this->user = $user;
     }
-
-
 
     /**
      * @return Subject

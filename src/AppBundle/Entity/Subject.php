@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
@@ -27,7 +28,7 @@ class Subject
     private $id;
 
     /**
-     * @var Post[]
+     * @var ArrayCollection
      *
      * @OneToMany(targetEntity="Post", mappedBy="subject")
      */
@@ -61,6 +62,7 @@ class Subject
      */
     public function __construct()
     {
+        $this->posts = new ArrayCollection();
         $this->createAt = new \DateTime();
     }
 
@@ -81,7 +83,18 @@ class Subject
     }
 
     /**
-     * @return Post[]
+     * @param Post $post
+     * @return $this
+     */
+    public function addPost(Post $post)
+    {
+        $this->posts[] = $post;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
      */
     public function getPosts()
     {
@@ -89,7 +102,7 @@ class Subject
     }
 
     /**
-     * @param Post[] $posts
+     * @param ArrayCollection $posts
      */
     public function setPosts($posts)
     {

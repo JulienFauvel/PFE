@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SubjectType extends AbstractType
+class SubjectPostType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -20,7 +20,8 @@ class SubjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('subject', TextType::class)
+            ->add('post', TextareaType::class)
             ->add('valider', SubmitType::class)
         ;
     }
@@ -30,8 +31,6 @@ class SubjectType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Subject'
-        ));
+        $resolver->setDefaults(array());
     }
 }
