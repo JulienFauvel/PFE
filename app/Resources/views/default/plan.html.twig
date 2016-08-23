@@ -4,7 +4,7 @@
 {% block content %}
 
     <div>
-        <h1>Bienvenue sur Quark !</h1>
+        <h1>quark.website application</h1>
     </div>
 
     <div>
@@ -13,7 +13,13 @@
 
     <div>
         <p>
-            Bonjour
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('restaurants') }}">Restaurants</a></li>
+                    <li><a href="{{ path('voyages') }}">Voyages</a></li>
+                    <li><a href="{{ path('bonplans') }}">Bon plans</a></li>
+                    <li><a href="{{ path('bars-loisirs') }}">Bars &amp; Loisirs</a></li>
+                    <li><a href="{{ path('forum') }}">Forum</a></li>
+                </ul>
         </p>
     </div>
 
