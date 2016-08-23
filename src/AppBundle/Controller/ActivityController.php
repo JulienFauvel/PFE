@@ -68,7 +68,7 @@ class ActivityController extends Controller
 
         $activity = $this->getDoctrine()
             ->getManager()
-            ->getRepository('AppBundle:Category')
+            ->getRepository('AppBundle:Activity')
             ->getActivity($id);
 
         //Test si l'utilisateur est bien le créateur de l'activité

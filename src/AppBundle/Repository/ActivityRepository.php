@@ -50,7 +50,8 @@ class ActivityRepository extends EntityRepository
     public function getActivity($id)
     {
         return $this->createQueryBuilder('a')
-            ->where('a.id = '.$id)
+            ->where('a.id = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
     }
