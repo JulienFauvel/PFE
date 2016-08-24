@@ -284,7 +284,9 @@ class ActivityController extends Controller
             $item->parentNode->removeChild($item);
         }
 
-        return $dom->saveHTML();
+        return preg_replace(
+            array("/^\<\!DOCTYPE.*?<html><body>/si", "!</body></html>$!si"), "", $dom->saveHTML()
+        );
     }
 
 
