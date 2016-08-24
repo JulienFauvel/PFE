@@ -125,15 +125,18 @@ class ActivityController extends Controller
      */
     public function showAction($id = 0)
     {
+        //On récupère l'activité
         $activity = $this->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Activity')
             ->getActivity($id);
 
+        //Si l'activité n'existe pas, on redirige vers un 404
         if($activity === null) {
             throw $this->createNotFoundException("The activity doesn't exist");
         }
 
+        //On affiche la vue avec l'activé passé en paramètre
         return $this->render('activity/show.html.twig', [
             'activity' => $activity,
         ]);
