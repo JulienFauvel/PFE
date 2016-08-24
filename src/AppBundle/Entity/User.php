@@ -6,6 +6,7 @@ use AppBundle\Form\SubjectType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Doctrine\ORM\Mapping\OneToMany;
 
@@ -115,9 +116,17 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=128, name="profile_picture", nullable=true)
+     * @Assert\File(
+     *     maxSize="2048k",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Only the filetypes jpeg and png are allowed.")
      */
-    private $profilePicture;
+    private $profilePictureFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profilePicturePath;
 
     /**
      * @ORM\Column(type="string", length=1024, nullable=true)
@@ -530,28 +539,54 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     }
 
     /**
-     * Set profilePicture
-     *
-     * @param string $profilePicture
-     *
-     * @return User
+     * @return mixed
      */
-    public function setProfilePicture($profilePicture)
+    public function getProfilePictureFile()
     {
-        $this->profilePicture = $profilePicture;
-
-        return $this;
+        return $this->profilePictureFile;
     }
 
     /**
-     * Get profilePicture
-     *
-     * @return string
+     * @param mixed $profilePictureFile
      */
-    public function getProfilePicture()
+    public function setProfilePictureFile($profilePictureFile)
     {
-        return $this->profilePicture;
+        $this->profilePictureFile = $profilePictureFile;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTempProfilePicturePath()
+    {
+        return $this->tempProfilePicturePath;
+    }
+
+    /**
+     * @param mixed $tempProfilePicturePath
+     */
+    public function setTempProfilePicturePath($tempProfilePicturePath)
+    {
+        $this->tempProfilePicturePath = $tempProfilePicturePath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProfilePicturePath()
+    {
+        return $this->profilePicturePath;
+    }
+
+    /**
+     * @param mixed $profilePicturePath
+     */
+    public function setProfilePicturePath($profilePicturePath)
+    {
+        $this->profilePicturePath = $profilePicturePath;
+    }
+
+
 
     /**
      * Set description
@@ -707,7 +742,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
                 $this->city,
                 $this->country,
                 $this->phoneNumber,
-                $this->profilePicture,
+                $this->profilePicturePath,
                 $this->description,
                 $this->fidelity,
                 $this->moderator,

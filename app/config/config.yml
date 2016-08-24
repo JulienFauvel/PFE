@@ -8,6 +8,8 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    profile_image_directory: '%kernel.root_dir%/../web/uploads/profile_images'
+    activity_image_directory: '%kernel.root_dir%/../web/uploads/activity_images'
 
 framework:
     #esi:             ~

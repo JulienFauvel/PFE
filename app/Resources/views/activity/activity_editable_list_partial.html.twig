@@ -1,9 +1,10 @@
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
         {# Image à mettre #}
-        {{ activity.title }}
+        <h3>{{ activity.title }}</h3>
+        <img class="img-responsive" src="{{ asset('/uploads/activity_images/' ~ activity.activityPicturePath) }}">
+
         <div class="caption">
-            <h3>{{ activity.title }}</h3>
             <h4>{{ activity.category.displayName }}</h4>
             <p>
                 {{ activity.description|replace({'<script>': '&lt;script&gt;', '</script>': '&lt;/script&gt;'})|raw }}

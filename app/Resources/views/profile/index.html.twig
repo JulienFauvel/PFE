@@ -11,7 +11,7 @@
         <p>{{ app.user.lastName }}</p>
         <p>{{ app.user.birthday|date("d/m/Y") }}</p>
         <p>{{ app.user.phoneNumber }}</p>
-        <p>{{ app.user.profilePicture }}</p>
+        <p><img src="{{ asset('/uploads/profile_images/' ~ app.user.profilePicturePath) }}" height="120px"/></p>
         <p>{{ app.user.description }}</p>
         <p>{{ app.user.fidelity }}</p>
     </div>
@@ -20,10 +20,10 @@
     <div>
         <H4>Vos contributions :</H4>
         <p>
-            <ULstyle="list-style-type:square">
-                <LI><a href="{{ path('my_activities') }}">Voir mes activités créées</a>
-                <LI><a href="{{ path('my_subjects') }}">Voir mes sujets créés</a>
-            </UL>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{{ path('my_activities') }}">Voir mes activités créées</a>
+                <li class="list-group-item"><a href="{{ path('my_subjects') }}">Voir mes sujets créés</a>
+            </ul>
         <br />
         <br />
         <br />

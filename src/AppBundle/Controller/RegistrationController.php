@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\RegistrationType;
 
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -70,6 +71,18 @@ class RegistrationController extends BaseController
 
                 return $this->redirectToRoute('homepage');
             }
+
+            /** @var UploadedFile $image */
+            $image = $user->getProfilePictureFile();
+            $fileName = md5(uniqid()).'.'.$image->guessExtension();
+
+            $image->move(
+                $this->getParameter('profile_image_directory'),
+                $fileName
+            );
+
+            $user->setProfilePicturePath($fileName);
+
 
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());

@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -21,6 +22,7 @@ class ActivityType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
+            ->add('activityPictureFile', FileType::class)
             ->add('description', TextareaType::class)
             ->add('street', TextType::class)
             ->add('city', TextType::class)

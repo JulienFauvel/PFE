@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\ActivityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -36,6 +38,17 @@ class ActivityController extends Controller
             $description = $activity->getDescription();
             $description = $this->removeScript($description);
             $activity->setDescription($description);
+
+            /** @var UploadedFile $image */
+            $image = $activity->getActivityPictureFile();
+            $fileName = md5(uniqid()).'.'.$image->guessExtension();
+
+            $image->move(
+                $this->getParameter('activity_image_directory'),
+                $fileName
+            );
+
+            $activity->setActivityPicturePath($fileName);
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
@@ -97,6 +110,10 @@ class ActivityController extends Controller
             $description = $activity->getDescription();
             $description = $this->removeScript($description);
             $activity->setDescription($description);
+
+            $activity->setActivityPath(
+                new File($this->getParameter('brochures_directory').'/'.$activity->getActivityPath())
+            );
 
 
             $em = $this->getDoctrine()->getEntityManager();

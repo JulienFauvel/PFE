@@ -6,6 +6,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -42,7 +43,9 @@ class RegistrationType extends AbstractType
             ->add('city', TextType::class)
             ->add('country', TextType::class)
             ->add('phoneNumber', TextType::class)
-            ->add('profilePicture', TextType::class)
+            ->add('profilePictureFile', FileType::class, [
+                'label' => 'Image .png, .jpeg'
+            ])
             ->add('description', TextType::class)
             ->add('submit', SubmitType::class);
     }

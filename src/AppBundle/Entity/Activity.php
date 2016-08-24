@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -60,6 +61,19 @@ class Activity
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+
+    /**
+     * @Assert\File(
+     *     maxSize="2048k",
+     *     mimeTypes = {"image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Only the filetypes jpeg and png are allowed.")
+     */
+    private $activityPictureFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $activityPicturePath;
 
     /**
      * @var string
@@ -214,6 +228,38 @@ class Activity
     public function setTitle(string $title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActivityPictureFile()
+    {
+        return $this->activityPictureFile;
+    }
+
+    /**
+     * @param mixed $activityPictureFile
+     */
+    public function setActivityPictureFile($activityPictureFile)
+    {
+        $this->activityPictureFile = $activityPictureFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActivityPicturePath()
+    {
+        return $this->activityPicturePath;
+    }
+
+    /**
+     * @param mixed $activityPicturePath
+     */
+    public function setActivityPicturePath($activityPicturePath)
+    {
+        $this->activityPicturePath = $activityPicturePath;
     }
 
     /**
