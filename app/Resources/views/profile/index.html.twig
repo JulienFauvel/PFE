@@ -15,10 +15,21 @@
         <p>{{ app.user.description }}</p>
         <p>{{ app.user.fidelity }}</p>
     </div>
-
+    <br />
+    <br />
     <div>
-        <a href="{{ path('my_activities') }}">Voir mes activités créées</a>
-        <a href="{{ path('my_subjects') }}">Voir mes sujets créés</a>
+        <H5>Vos contributions :</H5>
+        <p>
+            <ULstyle="list-style-type:square">
+                <LI><a href="{{ path('my_activities') }}">Voir mes activités créées</a>
+                <LI><a href="{{ path('my_subjects') }}">Voir mes sujets créés</a>
+            </UL>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        </p>
     </div>
 
 {% endblock %}
