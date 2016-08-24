@@ -17,12 +17,15 @@
     </div>
 
     <div>
-    <p>Vos contributions :</p>
-        <a href="{{ path('my_activities') }}">Voir mes activités créées</a>
+        <p>
+        Vos contributions :
+            <ULstyle="list-style-type:square">
+                <LI><a href="{{ path('my_activities') }}">Voir mes activités créées</a>
+                <LI><a href="{{ path('my_subjects') }}">Voir mes sujets créés</a>
+            </UL>
         <br />
-        <H4><a href="{{ path('my_subjects') }}">Voir mes sujets créés</a></H4>
         <br />
-        <br />
+        </p>
     </div>
 
 {% endblock %}
