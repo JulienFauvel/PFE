@@ -12,7 +12,7 @@
         <tr>
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.createdAt }}</td>
+            <td>{{ user.createdAt|date("d/m/Y H:i:s") }}</td>
             <a href="{{ path('user_disable', {'id': user.id}) }}"><a class="btn btn-danger">Désactiver</a>
         </tr>
     {% endfor %}
