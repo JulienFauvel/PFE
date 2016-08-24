@@ -34,11 +34,11 @@ class AdminController extends Controller
     /**
      * User DELETE action
      *
-     * @Route("/admin/user/delete/{id}", name="user_delete", requirements={"id": "\d+"})
+     * @Route("/admin/user/disable/{id}", name="user_disable", requirements={"id": "\d+"})
      * @param integer $id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function userDeleteAction($id)
+    public function userDisableAction($id)
     {
         return $this->redirectToRoute('admin');
     }
