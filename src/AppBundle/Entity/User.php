@@ -78,6 +78,13 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     private $evaluations;
 
     /**
+     * @var ArrayCollection
+     *
+     * @OneToMany(targetEntity="Contact", mappedBy="user")
+     */
+    private $contacts;
+
+    /**
      * @ORM\Column(type="string", length=64)
      */
     private $firstName;
@@ -147,6 +154,7 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
         $this->posts = new ArrayCollection();
         $this->activities = new ArrayCollection();
         $this->evaluations = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
         $this->setRoles(array(self::ROLE_USER));
         $this->fidelity = 0;
         $this->enabled = true;
@@ -266,6 +274,34 @@ class User extends BaseUser implements AdvancedUserInterface, \Serializable
     public function setEvaluations($evaluations)
     {
         $this->evaluations = $evaluations;
+    }
+
+    /**
+     * @param Contact $contact
+     * @return $this
+     */
+    public function addContact($contact)
+    {
+        $this->contacts->add($contact);
+        $contact->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
+    }
+
+    /**
+     * @param ArrayCollection $contacts
+     */
+    public function setContacts($contacts)
+    {
+        $this->contacts = $contacts;
     }
 
     /**

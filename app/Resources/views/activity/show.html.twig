@@ -21,7 +21,10 @@
     <div class="col-md-12">
         <h4>Evaluations :</h4>
         {% for ev in activity.evaluations %}
-            {{ dump(ev) }}
+            {{ ev.user.username }}
+            {{ ev.budget }}
+            {{ ev.score }}
+            {{ ev.comment }}
         {% endfor %}
     </div>
 

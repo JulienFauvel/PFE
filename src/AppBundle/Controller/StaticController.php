@@ -4,6 +4,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Form\ContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +22,7 @@ class StaticController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexConfidentialiteAction(Request $request)
     {
         return $this->render('default/confidentialite.html.twig');
     }
@@ -33,10 +34,33 @@ class StaticController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction2(Request $request)
+    public function indexContactAction(Request $request)
     {
-        return $this->render('default/contact.html.twig');
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contact = $form->getData();
+
+            $this->getUser()->addContact($contact);
+
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($contact);
+            $em->persist($this->getUser());
+            $em->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Message envoyé !');
+
+            return $this->redirectToRoute('contact');
+        }
+
+        return $this->render('default/contact.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
+
 
     /**
      * Index action
@@ -45,7 +69,7 @@ class StaticController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction3(Request $request)
+    public function indexLiberteAction(Request $request)
     {
         return $this->render('default/liberte.html.twig');
     }
@@ -57,7 +81,7 @@ class StaticController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction4(Request $request)
+    public function indexPlanAction(Request $request)
     {
         return $this->render('default/plan.html.twig');
     }
