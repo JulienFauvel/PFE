@@ -271,7 +271,7 @@ class ActivityController extends Controller
     private function removeScript($html)
     {
         $dom = new \DOMDocument();
-        $dom->loadHTML($html);
+        $dom->loadHTML(utf8_decode($html));
         $script = $dom->getElementsByTagName('script');
         $remove = [];
         foreach ($script as $item)
@@ -284,9 +284,12 @@ class ActivityController extends Controller
             $item->parentNode->removeChild($item);
         }
 
-        return preg_replace(
-            array("/^\<\!DOCTYPE.*?<html><body>/si", "!</body></html>$!si"), "", $dom->saveHTML()
-        );
+        $description = preg_replace(
+            array("/^\<\!DOCTYPE.*?<html><body><p>/si", "!</p></body></html>$!si"),
+            "",
+            $dom->saveHTML());
+
+        return utf8_encode($description);
     }
 
 
