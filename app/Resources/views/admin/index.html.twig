@@ -7,13 +7,14 @@
             <th>Username</th>
             <th>Email</th>
             <th>Date de création</th>
+            <th></th>
         </tr>
     {% for user in users %}
         <tr>
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.createdAt|date("d/m/Y H:i:s") }}</td>
-            <a class="btn btn-danger" href="{{ path('user_disable', {'id': user.id}) }}">Désactiver</a>
+            <td><a class="btn btn-danger" href="{{ path('user_disable', {'id': user.id}) }}">Désactiver</a></td>
         </tr>
     {% endfor %}
     </table>
