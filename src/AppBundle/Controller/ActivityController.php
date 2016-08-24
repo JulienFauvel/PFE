@@ -259,6 +259,12 @@ class ActivityController extends Controller
     }
 
 
+    /**
+     * Removes script tag from html
+     *
+     * @param $html
+     * @return string
+     */
     private function removeScript($html)
     {
         $dom = new \DOMDocument();

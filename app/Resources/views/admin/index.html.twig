@@ -4,7 +4,7 @@
     <h4>Number of users : {{ users|length }}</h4>
     {% for user in users %}
         <div>
-            <p>{{ dump( user ) }}</p>
+            <p>{{ user.username }}</p>
         </div>
     {% endfor %}
 {% endblock %}
