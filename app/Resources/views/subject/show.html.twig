@@ -13,4 +13,10 @@
         </div>
     {% endfor %}
 
+    {% if app.user %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    {% endif %}
+
 {% endblock %}

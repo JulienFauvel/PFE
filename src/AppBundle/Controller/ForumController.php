@@ -31,23 +31,7 @@ class ForumController extends Controller
             array('subjects' => $subjects));
     }
 
-    /**
-     * Show action
-     *
-     * @Route("/forum/subject/show/{id}", name="subject_show", requirements={"id": "\d+"})
-     * @param integer $id
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function showAction($id)
-    {
-        $subject = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('AppBundle:Subject')
-            ->getSubject($id);
 
-        return $this->render('subject/show.html.twig',
-            array('subject' => $subject));
-    }
 
     /**
      * Index action

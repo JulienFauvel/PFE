@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Post;
 use AppBundle\Entity\Subject;
+use AppBundle\Form\PostType;
 use AppBundle\Form\SubjectPostType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -57,6 +58,39 @@ class SubjectController extends Controller
                 'form' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * Show action
+     *
+     * @Route("/forum/subject/show/{id}", name="subject_show", requirements={"id": "\d+"})
+     * @param integer $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction($id)
+    {
+        $request = $this->get('request_stack')->getCurrentRequest();
+
+        /** @var Subject $subject */
+        $subject = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Subject')
+            ->getSubject($id);
+
+        $post = new Post();
+        $post->setSubject($subject);
+
+        $form = $this->createForm(PostType::class, $post, [
+            'action' => $this->generateUrl('post_new', [
+                'subject_id' => $subject->getId()
+            ])
+        ]);
+        $form->handleRequest($request);
+
+        return $this->render('subject/show.html.twig', [
+            'subject' => $subject,
+            'form' => $form->createView()
+        ]);
     }
 
 }
