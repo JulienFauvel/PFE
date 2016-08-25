@@ -22,7 +22,9 @@ class ActivityType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('activityPictureFile', FileType::class)
+            ->add('activityPictureFile', FileType::class, [
+                'required' => false
+            ])
             ->add('description', TextareaType::class)
             ->add('street', TextType::class)
             ->add('city', TextType::class)
