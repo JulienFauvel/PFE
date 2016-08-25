@@ -87,6 +87,7 @@ class ActivityController extends Controller
             return $this->redirectToRoute('activity_new');
         }
 
+        /** @var Activity $activity */
         $activity = $this->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Activity')
@@ -101,6 +102,10 @@ class ActivityController extends Controller
             return $this->redirectToRoute('my_activities');
         }
 
+        $activity->setActivityPictureFile(
+            new File($this->getParameter('activity_image_directory') .'/'. $activity->getActivityPicturePath())
+        );
+
         $form = $this->createForm(ActivityType::class, $activity);
         $form->handleRequest($request);
 
@@ -111,10 +116,14 @@ class ActivityController extends Controller
             $description = $this->removeScript($description);
             $activity->setDescription($description);
 
-            $activity->setActivityPictureFile(
-                new File($this->getParameter('activity_image_directory') .'/'. $activity->getActivityPicturePath())
-            );
+            /** @var UploadedFile $image */
+            $image = $activity->getActivityPictureFile();
+            $fileName = md5(uniqid()).'.'.$image->guessExtension();
 
+            $image->move(
+                $this->getParameter('activity_image_directory'),
+                $fileName
+            );
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
