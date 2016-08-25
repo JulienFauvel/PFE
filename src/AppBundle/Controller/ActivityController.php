@@ -125,6 +125,8 @@ class ActivityController extends Controller
                 $fileName
             );
 
+            $activity->setActivityPicturePath($fileName);
+
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
             $em->flush();
