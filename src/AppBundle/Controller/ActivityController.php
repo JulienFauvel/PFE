@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Activity;
 use AppBundle\Form\ActivityType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
@@ -104,15 +105,14 @@ class ActivityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var $activity */
-
+            /** @var Activity $activity */
             $activity = $form->getData();
             $description = $activity->getDescription();
             $description = $this->removeScript($description);
             $activity->setDescription($description);
 
-            $activity->setActivityPath(
-                new File($this->getParameter('brochures_directory').'/'.$activity->getActivityPath())
+            $activity->setActivityPicturePath(
+                new File($this->getParameter('brochures_directory').'/'.$activity->setActivityPicturePath())
             );
 
 
