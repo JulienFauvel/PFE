@@ -111,8 +111,8 @@ class ActivityController extends Controller
             $description = $this->removeScript($description);
             $activity->setDescription($description);
 
-            $activity->setActivityPicturePath(
-                new File($this->getParameter('activity_image_directory').'/'.basename($activity->getActivityPicturePath()))
+            $activity->setActivityPictureFile(
+                new File($this->getParameter('activity_image_directory') .'/'. $activity->getActivityPicturePath())
             );
 
 
