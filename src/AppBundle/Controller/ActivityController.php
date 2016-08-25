@@ -112,7 +112,7 @@ class ActivityController extends Controller
             $activity->setDescription($description);
 
             $activity->setActivityPicturePath(
-                new File($this->getParameter('activity_image_directory').'/'.$activity->getActivityPicturePath())
+                new File($this->getParameter('activity_image_directory').'/'.basename($activity->getActivityPicturePath()))
             );
 
 
