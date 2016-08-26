@@ -24,7 +24,7 @@ class ActivityRepository extends EntityRepository
             ->where('lower(a.title) LIKE lower(:title)')
             ->setParameter('title', '%'.$q.'%')
             ->getQuery()
-            ->getArrayResult();
+            ->getResult();
     }
 
     /**
