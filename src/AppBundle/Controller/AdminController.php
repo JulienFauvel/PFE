@@ -43,4 +43,23 @@ class AdminController extends Controller
         return $this->redirectToRoute('admin');
     }
 
+    /**
+     * Admin contact
+     *
+     * @Route("/admin/contacts", name="admin_contact")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function contactAction(Request $request)
+    {
+        $contacts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('AppBundle:Contact')
+            ->getContacts();
+
+        return $this->render('admin/contact.html.twig', [
+            'contacts' => $contacts
+        ]);
+    }
+
 }
