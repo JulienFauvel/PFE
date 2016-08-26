@@ -9,7 +9,7 @@
         <p>{{ user.firstName }}</p>
         <p>{{ user.lastName }}</p>
         <p>{{ user.birthday|date("d/m/Y") }}</p>
-        <p>{{ user.profilePicture }}</p>
+        <p><img src="{{ user.profilePicturePath }}"/></p>
         <p>{{ user.description }}</p>
         <p>{{ user.fidelity }}</p>
     </div>
