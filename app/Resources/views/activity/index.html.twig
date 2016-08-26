@@ -38,14 +38,12 @@
     </div>
 
     <div class="col-md-12 col-xs-12">
-        <div class="row">
 
             {% for activity in activities %}
                 {% set var = {'activity': activity} %}
                 {% include 'activity/activity_list_partial.html.twig' %}
             {% endfor %}
 
-        </div>
     </div>
 
 {% endblock %}
