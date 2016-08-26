@@ -3,6 +3,11 @@
 {% block content %}
 
     <p>Résultats trouvés : {{ activities|length }}</p>
-    {{ dump( activities ) }}
+    <div class="col-md-12">
+        {% for activity in activities %}
+            {% set var = {'activity': activity} %}
+            {% include 'activity/activity_list_partial.html.twig' %}
+        {% endfor %}
+    </div>
 
 {% endblock %}
