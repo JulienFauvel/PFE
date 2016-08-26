@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Utilisateur</th>
+            <th>Message</th>
+            <th>Envoyé à</th>
+        </tr>
+
+        {% for contact in contacts %}
+            <tr>
+                <td>
+                    <a href="{{ path('profile_show', {'id': contact.user.id}) }}">
+                        {{ contact.user.email }}
+                    </a>
+                </td>
+                <td><p>{{ contact.message }}</p></td>
+                <td>{{ contact.createdAt|date("d/m/Y H:i:s") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
