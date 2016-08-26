@@ -17,7 +17,7 @@
                     </a>
                 </td>
                 <td><p>{{ contact.message }}</p></td>
-                {{ dump(contact) }}
+                <td>{{ contact.created_at|date("d/m/Y H:i:s") }}</td>
             </tr>
         {% endfor %}
     </table>
