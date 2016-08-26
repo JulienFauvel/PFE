@@ -7,3 +7,8 @@ services:
     custom_user_provider:
         class: "%custom_user_provider.class%"
         arguments: ['@fos_user.user_manager', {facebook: facebook_id, google: google_id}]
+
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
