@@ -220,7 +220,7 @@ class ActivityController extends Controller
         $activities = $this->getDoctrine()
             ->getManager()
             ->getRepository('AppBundle:Activity')
-            ->getActivitiesByCategory('bonplan');
+            ->getActivitiesByCategory('bon_plan');
 
         $cat = null;
         if(count($activities) > 0) $cat = $activities[0]->getCategory();
