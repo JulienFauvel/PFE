@@ -14,9 +14,11 @@
         <p>{{ user.fidelity }}</p>
     </div>
 
-    <div>
-        <a href="{{ path('my_activities') }}">Ses activités créées</a>
-        <a href="{{ path('my_subjects') }}">Ses sujets créés</a>
+    <div class="col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{ path('my_activities') }}">Ses activités créées</a></li>
+            <li class="list-group-item"><a href="{{ path('my_subjects') }}">Ses sujets créés</a></li>
+        </ul>
     </div>
 
 {% endblock %}
