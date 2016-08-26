@@ -6,7 +6,7 @@
         <div class="caption">
             <h4>{{ activity.category.displayName }}</h4>
             <p>
-                {{ activity.description | truncate(70, true) | raw }}
+                {{ activity.description | truncate(130, true) | raw }}
             </p>
             <p>
                 <a href="{{ path('activity_show', {'id': activity.id}) }}" class="btn btn-primary" role="button">
