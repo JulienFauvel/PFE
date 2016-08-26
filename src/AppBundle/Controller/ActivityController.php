@@ -42,14 +42,19 @@ class ActivityController extends Controller
 
             /** @var UploadedFile $image */
             $image = $activity->getActivityPictureFile();
-            $fileName = md5(uniqid()).'.'.$image->guessExtension();
 
-            $image->move(
-                $this->getParameter('activity_image_directory'),
-                $fileName
-            );
+            if($image !== null)
+            {
+                $fileName = md5(uniqid()).'.'.$image->guessExtension();
 
-            $activity->setActivityPicturePath($fileName);
+                $image->move(
+                    $this->getParameter('activity_image_directory'),
+                    $fileName
+                );
+
+                $activity->setActivityPicturePath($fileName);
+            }
+
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($activity);
