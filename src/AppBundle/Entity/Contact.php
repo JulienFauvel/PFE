@@ -42,14 +42,14 @@ class Contact
      *
      * @ORM\Column(name="created_at", type="datetime")
      */
-    private $createAt;
+    private $createdAt;
 
     /**
      * Contact constructor.
      */
     public function __construct()
     {
-        $this->createAt = new \DateTime();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -103,16 +103,16 @@ class Contact
     /**
      * @return \DateTime
      */
-    public function getCreateAt()
+    public function getCreatedAt()
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createAt
+     * @param \DateTime $createdAt
      */
-    public function setCreateAt($createAt)
+    public function setCreatedAt($createdAt)
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
     }
 }

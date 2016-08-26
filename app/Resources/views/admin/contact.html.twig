@@ -6,7 +6,7 @@
         <tr>
             <th>Utilisateur</th>
             <th>Message</th>
-            <th>Envoyé à</th>
+            <th>Envoyé le</th>
         </tr>
 
         {% for contact in contacts %}
@@ -17,7 +17,7 @@
                     </a>
                 </td>
                 <td><p>{{ contact.message }}</p></td>
-                <td>{{ contact.created_at|date("d/m/Y H:i:s") }}</td>
+                <td>{{ contact.createdAt|date("d/m/Y H:i:s") }}</td>
             </tr>
         {% endfor %}
     </table>
